@@ -51,8 +51,9 @@ public class ControlPoint : MonoBehaviour {
 
 		c_light.light.intensity = (_isSelected) ? SelectedLightIntensity : BaseLightIntensity;
 
-		if(Input.GetMouseButton(0))
-			checkSelected();
+		if (Input.GetMouseButton (0)) {
+				}
+			//checkSelected();
 	}
 	void checkSelected()
 	{
@@ -64,9 +65,14 @@ public class ControlPoint : MonoBehaviour {
 						_isSelected = false;
 
 		if (Physics.Raycast(ray, out hit)){
-			if(hit.Equals(this))
-				_isSelected = true;
+			if(hit.transform.gameObject.tag == "ControlPoint")
+			{}}
 
-		}
 	}
+
+	void OnMouseDown(){
+		_isSelected = !_isSelected;
+
+	}
+
 }
