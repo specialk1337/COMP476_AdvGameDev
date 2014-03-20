@@ -6,6 +6,8 @@ public class ControlPoint : MonoBehaviour {
 
 	private enum ownerControl{Friendly, Neutral, Enemy};
 	private static bool oneSelected = false;
+	public float spawnDelay;
+	public GameObject mobPrefab;
 
 	private GameObject c_object;
 	private GameObject c_arrow;
@@ -14,6 +16,7 @@ public class ControlPoint : MonoBehaviour {
 	private bool firstDelay;
 	private float SelectedLightIntensity;
 	private float BaseLightIntensity;
+	private float lastSpawn;
 
 	[SerializeField]ownerControl controlOwner;
 
@@ -22,13 +25,14 @@ public class ControlPoint : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		lastSpawn = 0;
 		c_object = this.gameObject;
 		c_light = this.transform.FindChild ("c_Light").gameObject;
 		c_arrow = this.transform.FindChild ("c_arrow").gameObject;
 		ArrowScript arrowS = (ArrowScript)c_arrow.GetComponent (typeof(ArrowScript));
 		arrowS.initilize (connectedPoints[0].transform.position, this.transform.position);
 		arrows.Add (c_arrow);
-		for(int i = 1; i != connectedPoints.Count; ++i)
+		for(int i = 1; i < connectedPoints.Count; ++i)
 		{
 			GameObject newArrow = GameObject.Instantiate(c_arrow, new Vector3(0,0,0), Quaternion.identity) as GameObject;
 			arrowS = (ArrowScript)newArrow.GetComponent (typeof(ArrowScript));
@@ -43,6 +47,14 @@ public class ControlPoint : MonoBehaviour {
 		buildConnections ();
 
 	}
+
+	void OnTriggerEnter(Collider other) {
+		if (other.CompareTag ("Mob")) {
+			MobController mob = other.GetComponent<MobController> ();
+			mob.target = connectedPoints[0];
+		}
+	}
+
 	private void buildConnections()
 	{
 		/* Hardcoded for now as input from designer. so a "level" builder will need to build the paths. 
@@ -69,6 +81,14 @@ public class ControlPoint : MonoBehaviour {
 
 		if (Input.GetMouseButton(0)) {
 			checkSelected();
+		}
+
+		if (lastSpawn >= spawnDelay) {
+			GameObject mob = (GameObject)Instantiate (mobPrefab, transform.position, Quaternion.identity);
+			mob.GetComponent<MobController> ().target = connectedPoints [0];
+			lastSpawn = 0;
+		} else {
+			lastSpawn += Time.deltaTime;
 		}
 			
 	}
