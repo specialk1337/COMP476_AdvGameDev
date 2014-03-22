@@ -1,24 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets\Character Controllers\Sources\Scripts\ControlPoint.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets\MyScripts\ControlPoint.cs">
     <Files>
-<<<<<<< HEAD
-      <File FileName="Assets\Standard Assets\MyScripts\ArrowScript.cs" Line="20" Column="18" />
-      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\ControlPoint.cs" Line="35" Column="53" />
-      <File FileName="..\..\Gamegev_Assignment\A5_Path_Kcameron\Assets\Standard Assets\SelectAndDrag.js" Line="1" Column="1" />
-=======
-      <File FileName="Assets\Standard Assets\MyScripts\ArrowScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\ControlPoint.cs" Line="39" Column="43" />
-      <File FileName="Assets\Standard Assets\MyScripts\MobController.cs" Line="25" Column="3" />
->>>>>>> 29787c796eecd032fba0dcc890690de08382b1c1
+      <File FileName="Assets\Standard Assets\MyScripts\MobController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets\MyScripts\ArrowScript.cs" Line="10" Column="5" />
+      <File FileName="Assets\Standard Assets\MyScripts\ControlPoint.cs" Line="99" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="D:\COMP476_AdvGameDev\ApocalypseWar\Assets\Standard Assets\Character Controllers\Sources\Scripts\ControlPoint.cs" line="33" />
-      <Breakpoint file="D:\COMP476_AdvGameDev\ApocalypseWar\Assets\Standard Assets\Character Controllers\Sources\Scripts\ControlPoint.cs" line="34" />
-      <Breakpoint file="D:\COMP476_AdvGameDev\ApocalypseWar\Assets\Standard Assets\MyScripts\ArrowScript.cs" line="20" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
