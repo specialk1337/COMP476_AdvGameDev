@@ -2,13 +2,17 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets\Character Controllers\Sources\Scripts\ControlPoint.cs">
     <Files>
-      <File FileName="Assets\Standard Assets\MyScripts\ArrowScript.cs" Line="14" Column="22" />
-      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\ControlPoint.cs" Line="33" Column="36" />
+      <File FileName="Assets\Standard Assets\MyScripts\ArrowScript.cs" Line="20" Column="18" />
+      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\ControlPoint.cs" Line="35" Column="53" />
       <File FileName="..\..\Gamegev_Assignment\A5_Path_Kcameron\Assets\Standard Assets\SelectAndDrag.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="D:\COMP476_AdvGameDev\ApocalypseWar\Assets\Standard Assets\Character Controllers\Sources\Scripts\ControlPoint.cs" line="33" />
+      <Breakpoint file="D:\COMP476_AdvGameDev\ApocalypseWar\Assets\Standard Assets\Character Controllers\Sources\Scripts\ControlPoint.cs" line="34" />
+      <Breakpoint file="D:\COMP476_AdvGameDev\ApocalypseWar\Assets\Standard Assets\MyScripts\ArrowScript.cs" line="20" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

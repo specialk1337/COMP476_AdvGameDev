@@ -11,7 +11,9 @@ public class ArrowScript : MonoBehaviour {
 
 	public void initilize(Vector3 pointAt, Vector3 pointFrom)
 	{
+
 		float scale = 3.5f;
+		//transform.localPosition = pointFrom;
 		//Vector3 direction = pointFrom - pointAt;
 		Vector3 direction = pointAt - pointFrom;
 		direction = direction.normalized;

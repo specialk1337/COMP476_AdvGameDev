@@ -30,9 +30,12 @@ public class ControlPoint : MonoBehaviour {
 		arrows.Add (c_arrow);
 		for(int i = 1; i != connectedPoints.Count; ++i)
 		{
-			GameObject newArrow = GameObject.Instantiate(c_arrow, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+			GameObject newArrow = GameObject.Instantiate(c_arrow, this.transform.position, Quaternion.identity) as GameObject;
 			arrowS = (ArrowScript)newArrow.GetComponent (typeof(ArrowScript));
+			newArrow.transform.position = new Vector3(0,0,0);
 			arrowS.initilize (connectedPoints[i].transform.position, this.transform.position);
+			newArrow.transform.parent = this.gameObject.transform;
+
 			arrows.Add(newArrow);
 		}
 		BaseLightIntensity = c_light.light.intensity;
