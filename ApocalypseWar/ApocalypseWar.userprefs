@@ -2,13 +2,17 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets\MyScripts\ControlPoint.cs">
     <Files>
-      <File FileName="Assets\Standard Assets\MyScripts\MobController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Standard Assets\MyScripts\ArrowScript.cs" Line="10" Column="5" />
-      <File FileName="Assets\Standard Assets\MyScripts\ControlPoint.cs" Line="99" Column="19" />
+      <File FileName="Assets\Standard Assets\MyScripts\ControlPoint.cs" Line="75" Column="4" />
+      <File FileName="Assets\Standard Assets\MyScripts\MobController.cs" Line="35" Column="66" />
+      <File FileName="Assets\Standard Assets\MyScripts\ArrowScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets\MyScripts\AnchorScript.cs" Line="17" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="D:\COMP476_AdvGameDev\ApocalypseWar\Assets\Standard Assets\MyScripts\ControlPoint.cs" line="76" />
+      <Breakpoint file="D:\COMP476_AdvGameDev\ApocalypseWar\Assets\Standard Assets\MyScripts\ControlPoint.cs" line="73" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
