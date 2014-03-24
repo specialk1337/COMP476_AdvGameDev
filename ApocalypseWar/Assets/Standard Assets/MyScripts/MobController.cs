@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MobController : MonoBehaviour {
 	public GameObject target;
+	private Vector3 targetPoint;/*Kevin*/
 	public bool flee;
 	
 	public float maxVelocity;
@@ -16,13 +17,22 @@ public class MobController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		velocity = new Vector2 (0, 0);
+		targetPoint = this.transform.position;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		/* Handle if the anchor gets deleted - Kevin*/
+		if(target != null)
+		{
+			targetPoint = target.transform.position;
+		}
+
 		float t = Time.deltaTime;
 
-		SteeringArrive (new Vector2 (target.transform.position.x, target.transform.position.z), t);
+		SteeringArrive (new Vector2 (targetPoint.x, targetPoint.z), t);
 
 		Align (new Vector3(velocity.x,0f,velocity.y), t);
 		
