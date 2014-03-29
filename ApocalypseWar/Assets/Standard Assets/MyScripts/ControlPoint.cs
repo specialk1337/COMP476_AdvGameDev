@@ -96,9 +96,6 @@ public class ControlPoint : MonoBehaviour {
 				activeTroops.Add(other.gameObject);
 			}
 		}
-		if (other.CompareTag ("Anchor")) {
-			Destroy(other.gameObject);
-		}
 	}
 
 	private void arrowSelector()
@@ -157,8 +154,6 @@ public class ControlPoint : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown(0)) {
 			checkSelected();
-			debugCounter++;
-			Debug.Log(debugCounter.ToString());
 		}
 		
 		switch(controlPointState)
@@ -168,7 +163,7 @@ public class ControlPoint : MonoBehaviour {
 			if (lastSpawn >= spawnDelay) {
 				GameObject mob = (GameObject)Instantiate (mobPrefab, transform.position, Quaternion.identity);
 				mob.GetComponent<MobController> ().friendly = (controlPointState == ownerControl.Friendly);
-				mob.GetComponent<MobController> ().target = this.gameObject;
+				mob.GetComponent<MobController> ().target = this.transform.position;
 				activeTroops.Add(mob);
 				lastSpawn -= spawnDelay;
 			} else {
@@ -176,17 +171,10 @@ public class ControlPoint : MonoBehaviour {
 			}
 			if (lastAnchor >= anchorDelay) {
 				GameObject anchor = (GameObject)Instantiate (AnchorPreFab, transform.position, Quaternion.identity);
-				anchor.GetComponent<MobController> ().target = ActiveTarget;
-				List<GameObject> mobWave = activeTroops;
+				anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.transform.position, activeTroops);
+				activeTroops.Clear();
 				lastAnchor = 0;
-				if(mobWave.Count > 0)
-				{
-					foreach(GameObject mob in mobWave)
-					{
-						mob.GetComponent<MobController> ().target = anchor;
-					}
-					activeTroops.Clear();
-				}
+			
 			} else {
 				lastAnchor += Time.deltaTime;
 			}

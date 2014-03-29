@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class MobController : MonoBehaviour {
-	public GameObject target;
+	public Vector3 target;
 	private Vector3 targetPoint;/*Kevin*/
 	public bool flee;
 	
@@ -110,7 +110,7 @@ public class MobController : MonoBehaviour {
 		/* Handle if the anchor gets deleted - Kevin*/
 		if(target != null)
 		{
-			targetPoint = target.transform.position;
+			targetPoint = target;
 		}
 		
 		KinematicArrive (new Vector2 (targetPoint.x, targetPoint.z), t);
