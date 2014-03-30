@@ -12,7 +12,7 @@ public class MobController : MonoBehaviour {
 	public float t2t;
 	public float turnSpeed;
 	
-	public Vector2 velocity;
+	public Vector3 velocity;
 
 	public bool friendly;
 	public int maxHitPoints;
@@ -31,11 +31,11 @@ public class MobController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		velocity = new Vector2 (0, 0);
+		velocity = new Vector3 (0, 0, 0);
 		targetPoint = this.transform.position;
 
 		currentHitPoints = maxHitPoints = 30;
-		attackPower = 10;
+		attackPower = 15;
 		damageVariance = 0.2f;
 		attackDelay = 1f;
 		attackRange = 2f;
@@ -127,9 +127,11 @@ public class MobController : MonoBehaviour {
 			targetPoint = target;
 		}
 		
-		KinematicArrive (new Vector2 (targetPoint.x, targetPoint.z), t);
+		KinematicArrive (targetPoint, t);
 		
-		Align (new Vector3(velocity.x,0f,velocity.y), t);
+		if (velocity.magnitude > 0) {
+			Align (velocity, t);
+		}
 
 		Vector3 position = transform.position;
 		
@@ -146,64 +148,60 @@ public class MobController : MonoBehaviour {
 			animation.Play ("run");
 	}
 	
-	void KinematicArrive(Vector2 target, float t) {
-		Vector2 position = new Vector2 (transform.position.x, transform.position.z);
-		Vector2 direction = target - position;
+	void KinematicArrive(Vector3 target, float t) {
+		Vector3 direction = target - transform.position;
 		
 		if(direction.magnitude > satisfactionRadius) {
 			velocity = maxVelocity * direction.normalized;
 		}
 		else if(direction.magnitude <= 0.25f) {
-			velocity = Vector2.zero;
+			velocity = Vector3.zero;
 		} else {
 			velocity = Mathf.Max(maxVelocity, direction.magnitude) * direction.normalized;
 		}
+
+		transform.position += velocity * t;
 		
-		position = position + velocity * t;
-		
-		transform.position = new Vector3(position.x, 1, position.y);
+		//transform.position = new Vector3(position.x, 1, position.y);
 	}
 	
-	void SteeringArrive(Vector2 target, float t) {
-		Vector2 position = new Vector2 (transform.position.x, transform.position.z);
-		Vector2 direction = target - position;
-		Vector2 acceleration = maxAcceleration * direction.normalized;
+	void SteeringArrive(Vector3 target, float t) {
+		Vector3 direction = target - transform.position;
+		Vector3 acceleration = maxAcceleration * direction.normalized;
 		
-		velocity = velocity + acceleration * t;
+		velocity += acceleration * t;
 		
 		if (velocity.magnitude > maxVelocity) {
 			velocity = Mathf.Min (maxVelocity, direction.magnitude / t2t) * velocity.normalized;
 		}
 		
-		position = position + velocity * t;
+		transform.position += velocity * t;
 		
-		transform.position = new Vector3(position.x, 1, position.y);
+		//transform.position = new Vector3(position.x, 1, position.y);
 	}
 	
-	void SteeringFlee(Vector2 target, float t) {
-		Vector2 position = new Vector2 (transform.position.x, transform.position.z);
-		Vector2 direction = position - target;
-		Vector2 acceleration = maxAcceleration * direction.normalized;
+	void SteeringFlee(Vector3 target, float t) {
+		Vector3 direction = transform.position - target;
+		Vector3 acceleration = maxAcceleration * direction.normalized;
 		
 		velocity = velocity + acceleration * t;
 		
 		if (velocity.magnitude > maxVelocity)
 			velocity = maxVelocity * velocity.normalized;
 		
-		position = position + velocity * t;
+		transform.position += velocity * t;
 		
-		transform.position = new Vector3(position.x, 1, position.y);
+		//transform.position = new Vector3(position.x, 1, position.y);
 	}
 	
-	void KinematicFlee(Vector2 target, float t) {
-		Vector2 position = new Vector2 (transform.position.x, transform.position.z);
-		Vector2 direction = position - target;
+	void KinematicFlee(Vector3 target, float t) {
+		Vector3 direction = transform.position - target;
 		
 		velocity = maxVelocity * direction.normalized;
 		
-		position = position + velocity * t;
+		transform.position += velocity * t;
 		
-		transform.position = new Vector3(position.x, 1, position.y);
+		//transform.position = new Vector3(position.x, 1, position.y);
 	}
 	
 	void Align(Vector3 targetOrientation, float t) {
