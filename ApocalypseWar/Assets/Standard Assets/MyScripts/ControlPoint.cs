@@ -59,10 +59,10 @@ public class ControlPoint : MonoBehaviour {
 				newArrow.SetActive(false);
 			}
 		}
-		BaseLightIntensity = c_light.light.intensity;
-		SelectedLightIntensity = BaseLightIntensity + 2.5f;
-		_isSelected = false;
 		c_light.light.color = Color.white;
+		BaseLightIntensity = c_light.light.intensity;
+		SelectedLightIntensity = BaseLightIntensity + 1.75f;
+		_isSelected = false;
 
 		controlDistance = 3f;
 		captureSpeed = 0.1f;
@@ -162,18 +162,29 @@ public class ControlPoint : MonoBehaviour {
 		case ownerControl.Friendly:
 		case ownerControl.Enemy:
 			if (lastSpawn >= spawnDelay) {
-				GameObject mob = (GameObject)Instantiate (mobPrefab, transform.position, Quaternion.identity);
+				Vector3 v = new Vector3 (Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f));
+				GameObject mob = (GameObject)Instantiate (mobPrefab, transform.position + v, Quaternion.identity);
 				mob.GetComponent<MobController> ().friendly = (controlPointState == ownerControl.Friendly);
 				mob.GetComponent<MobController> ().target = this.transform.position;
-				activeTroops.Add(mob);
+				//activeTroops.Add(mob);
 				lastSpawn -= spawnDelay;
 			} else {
 				lastSpawn += Time.deltaTime;
 			}
 			if (lastAnchor >= anchorDelay) {
+				activeTroops.Clear();
+				GameObject[] mobs = GameObject.FindGameObjectsWithTag ("Mob");
+				float distance;
+				foreach (GameObject m in mobs) {
+					distance = (m.transform.position - gameObject.transform.position).magnitude;
+					if (distance < controlDistance &&
+					    controlPointState == ownerControl.Friendly && m.GetComponent<MobController>().friendly ||
+					    controlPointState == ownerControl.Enemy && !m.GetComponent<MobController>().friendly) {
+						activeTroops.Add (m);
+					}
+				}
 				GameObject anchor = (GameObject)Instantiate (AnchorPreFab, transform.position, Quaternion.identity);
 				anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.transform.position, activeTroops);
-				activeTroops.Clear();
 				lastAnchor = 0;
 			
 			} else {

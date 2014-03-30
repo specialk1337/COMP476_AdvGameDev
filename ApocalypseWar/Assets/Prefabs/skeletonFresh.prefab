@@ -1821,7 +1821,7 @@ MonoBehaviour:
   satisfactionRadius: 1
   t2t: 1
   turnSpeed: 3
-  velocity: {x: 0, y: 0}
+  velocity: {x: 0, y: 0, z: 0}
   friendly: 0
   maxHitPoints: 0
   currentHitPoints: 0
