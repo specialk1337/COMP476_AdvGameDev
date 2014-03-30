@@ -111,9 +111,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 400010}
   - 111: {fileID: 11100004}
+  - 54: {fileID: 5400000}
+  - 114: {fileID: 11400000}
+  - 136: {fileID: 13600000}
   m_Layer: 0
   m_Name: skeletonFresh
-  m_TagString: Untagged
+  m_TagString: Mob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -885,7 +888,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: -.965210259, z: 0, w: .261475176}
-  m_LocalPosition: {x: .0116130104, y: .514642715, z: -7.55644512}
+  m_LocalPosition: {x: 6.95848894, y: -.513401031, z: -.627416611}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400084}
@@ -1539,7 +1542,7 @@ EllipsoidParticleEmitter:
   m_GameObject: {fileID: 100004}
   serializedVersion: 2
   m_Enabled: 1
-  m_Emit: 1
+  m_Emit: 0
   minSize: .400000006
   maxSize: .600000024
   minEnergy: 1
@@ -1569,7 +1572,7 @@ EllipsoidParticleEmitter:
   m_GameObject: {fileID: 100006}
   serializedVersion: 2
   m_Enabled: 1
-  m_Emit: 1
+  m_Emit: 0
   minSize: .200000003
   maxSize: .5
   minEnergy: 3
@@ -1727,6 +1730,21 @@ MeshFilter:
 --- !u!1002 &3300003
 EditorExtensionImpl:
   serializedVersion: 6
+--- !u!54 &5400000
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!111 &11100000
 Animation:
   m_ObjectHideFlags: 1
@@ -1785,6 +1803,52 @@ Animation:
 --- !u!1002 &11100005
 EditorExtensionImpl:
   serializedVersion: 6
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7144ecde090c6c49814b395f7c6d4b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {x: 0, y: 0, z: 0}
+  flee: 0
+  maxVelocity: 3
+  maxAcceleration: 1
+  satisfactionRadius: 1
+  t2t: 1
+  turnSpeed: 3
+  velocity: {x: 0, y: 0}
+  friendly: 0
+  maxHitPoints: 0
+  currentHitPoints: 0
+  attackPower: 0
+  damageVariance: 0
+  attackDelay: 0
+  attackTimer: 0
+  attackRange: 0
+  dodgeChance: 0
+  armor: 0
+  idleDelay: 0
+  idleTimer: 0
+  deathDelay: 0
+  deathTimer: 0
+--- !u!136 &13600000
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

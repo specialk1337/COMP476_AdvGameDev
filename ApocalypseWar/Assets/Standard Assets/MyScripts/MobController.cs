@@ -12,7 +12,7 @@ public class MobController : MonoBehaviour {
 	public float t2t;
 	public float turnSpeed;
 	
-	private Vector2 velocity;
+	public Vector2 velocity;
 
 	public bool friendly;
 	public int maxHitPoints;
@@ -24,7 +24,11 @@ public class MobController : MonoBehaviour {
 	public float attackRange; // attack range
 	public float dodgeChance; // % chance to avoid an attack, range [0, 1]
 	public float armor; // % damage reduction, range [0, 1]
-	
+	public float idleDelay;
+	public float idleTimer;
+	public float deathDelay;
+	public float deathTimer;
+
 	// Use this for initialization
 	void Start () {
 		velocity = new Vector2 (0, 0);
@@ -34,15 +38,20 @@ public class MobController : MonoBehaviour {
 		attackPower = 10;
 		damageVariance = 0.2f;
 		attackDelay = 1f;
-		attackRange = 1f;
+		attackRange = 2f;
 		dodgeChance = 0.1f;
 		armor = 0f;
+
+		idleDelay = 0.1f;
+		idleTimer = 0f;
+		deathDelay = 3f;
+		deathTimer = 0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		gameObject.renderer.material.color = friendly ? Color.green : Color.red;
+		gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material.color = friendly ? Color.green : Color.red;
 		
 		float t = Time.deltaTime;
 
@@ -51,15 +60,14 @@ public class MobController : MonoBehaviour {
 		}
 
 		// if the code below is uncommented instead of "Move(t);", only the red team moves+?
-		/*
+
 		GameObject enemy = FindClosestEnemy ();
 		if (enemy != null && Vector3.Distance (transform.position, enemy.transform.position) < attackRange) {
 			Attack(enemy, t);
 		} else {
 			Move(t);
 		}
-		*/
-		Move(t); // comment this out if uncommenting the block above
+		//Move(t); // comment this out if uncommenting the block above
 	}
 
 	private GameObject FindClosestEnemy() {
@@ -84,6 +92,7 @@ public class MobController : MonoBehaviour {
 		MobController enemy = target.GetComponent<MobController>();
 		LookAt (target.transform.position, t);
 		if (attackTimer <= 0) {
+			animation.Play ("attack");
 			attackTimer += attackDelay;
 			// calculate chance to hit
 			if (Random.Range(0f, 1f) > enemy.dodgeChance) {
@@ -100,7 +109,12 @@ public class MobController : MonoBehaviour {
 
 	private void Die() {
 		// death animation etc.
-		Destroy (this);
+		animation.Play ("die");
+		if (deathTimer <= deathDelay) {
+			deathTimer += Time.deltaTime;
+		} else {
+			Destroy (this.gameObject);
+		}
 	}
 
 	private void Move(float t) {
@@ -116,10 +130,20 @@ public class MobController : MonoBehaviour {
 		KinematicArrive (new Vector2 (targetPoint.x, targetPoint.z), t);
 		
 		Align (new Vector3(velocity.x,0f,velocity.y), t);
-		
+
 		Vector3 position = transform.position;
 		
 		transform.position = position;
+
+		if (velocity.magnitude == 0) {
+			idleTimer += Time.deltaTime;
+		} else {
+			idleTimer = 0f;
+		}
+		if (idleTimer >= idleDelay)
+			animation.Play ("idle");
+		else
+			animation.Play ("run");
 	}
 	
 	void KinematicArrive(Vector2 target, float t) {

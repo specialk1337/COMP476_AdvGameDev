@@ -40,7 +40,7 @@ public class ControlPoint : MonoBehaviour {
 	void Start () {
 		lastSpawn = 0;
 		lastAnchor = 0;
-		c_object = this.gameObject;
+		c_object = this.transform.FindChild("c_Structure").gameObject;
 		c_light = this.transform.FindChild ("c_Light").gameObject;
 		activeTroops = new List<GameObject>();
 		//ArrowScript arrowS = (ArrowScript)c_arrow.GetComponent (typeof(ArrowScript));
@@ -62,8 +62,9 @@ public class ControlPoint : MonoBehaviour {
 		BaseLightIntensity = c_light.light.intensity;
 		SelectedLightIntensity = BaseLightIntensity + 2.5f;
 		_isSelected = false;
+		c_light.light.color = Color.white;
 
-		controlDistance = 2f;
+		controlDistance = 3f;
 		captureSpeed = 0.1f;
 
 		// state chosen manually in inspector
@@ -139,14 +140,14 @@ public class ControlPoint : MonoBehaviour {
 		switch(controlPointState)
 		{
 		case ownerControl.Enemy:
-			c_light.light.color = Color.red;
+			c_object.renderer.material.color = Color.red;
 			break;
 		case ownerControl.Friendly:
-			c_light.light.color = Color.green;
+			c_object.renderer.material.color = Color.green;
 			break;
 		case ownerControl.Neutral:
 		case ownerControl.InConflict:
-			c_light.light.color = Color.Lerp(Color.red, Color.green, (controlCounter + 1) / 2f);
+			c_object.renderer.material.color = Color.Lerp(Color.red, Color.green, (controlCounter + 1) / 2f);
 			break;
 		}
 
