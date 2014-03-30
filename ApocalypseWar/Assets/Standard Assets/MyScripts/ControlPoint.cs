@@ -26,6 +26,10 @@ public class ControlPoint : MonoBehaviour {
 	private float lastSpawn;
 	private float lastAnchor;
 
+	public float controlCounter; // range [-1, 1] from enemy to friendly
+	public float controlDistance;
+	public float captureSpeed;
+
 	[SerializeField]ownerControl controlPointState;
 
 	[SerializeField]private List<GameObject> connectedPoints;
@@ -56,9 +60,25 @@ public class ControlPoint : MonoBehaviour {
 			}
 		}
 		BaseLightIntensity = c_light.light.intensity;
-		SelectedLightIntensity = BaseLightIntensity + 5;
-		controlPointState = ownerControl.Neutral;
+		SelectedLightIntensity = BaseLightIntensity + 2.5f;
 		_isSelected = false;
+
+		controlDistance = 2f;
+		captureSpeed = 0.1f;
+
+		// state chosen manually in inspector
+		switch (controlPointState)
+		{
+		case ownerControl.Friendly:
+			controlCounter = 1f;
+			break;
+		case ownerControl.Enemy:
+			controlCounter = -1f;
+			break;
+		default:
+			controlCounter = 0f;
+			break;
+		}
 
 		buildConnections ();
 
@@ -71,10 +91,10 @@ public class ControlPoint : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.CompareTag ("Mob")) {
-			activeTroops.Add(other.gameObject);
-		}
-		if (other.CompareTag ("Anchor")) {
-			Destroy(other.gameObject);
+			if (controlPointState == ownerControl.Friendly && other.gameObject.GetComponent<MobController>().friendly ||
+			    controlPointState == ownerControl.Enemy && !other.gameObject.GetComponent<MobController>().friendly) {
+				activeTroops.Add(other.gameObject);
+			}
 		}
 	}
 
@@ -88,10 +108,34 @@ public class ControlPoint : MonoBehaviour {
 		/* Hardcoded for now as input from designer. so a "level" builder will need to build the paths. 
 		 */
 	}
+
+	private void UpdateControlState(float t) {
+		GameObject[] mobs = GameObject.FindGameObjectsWithTag ("Mob");
+		float distance;
+		foreach (GameObject m in mobs) {
+			distance = (m.transform.position - gameObject.transform.position).magnitude;
+			if (distance < controlDistance) {
+				float force = (controlDistance - distance) / controlDistance;
+				controlCounter += force * captureSpeed * t * (m.GetComponent<MobController>().friendly ? 1f : -1f);
+			}
+		}
+		controlCounter = Mathf.Clamp (controlCounter, -1f, 1f);
+		if (controlCounter >= 1f) {
+			controlPointState = ownerControl.Friendly;
+		} else if (controlCounter <= -1f) {
+			controlPointState = ownerControl.Enemy;
+		} else if (controlCounter == 0f) {
+			controlPointState = ownerControl.Neutral;
+		} else {
+			controlPointState = ownerControl.InConflict;
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () {
-		/* */
+
+		UpdateControlState (Time.deltaTime);
+
 		switch(controlPointState)
 		{
 		case ownerControl.Enemy:
@@ -101,7 +145,8 @@ public class ControlPoint : MonoBehaviour {
 			c_light.light.color = Color.green;
 			break;
 		case ownerControl.Neutral:
-			c_light.light.color = Color.gray;
+		case ownerControl.InConflict:
+			c_light.light.color = Color.Lerp(Color.red, Color.green, (controlCounter + 1) / 2f);
 			break;
 		}
 
@@ -109,36 +154,36 @@ public class ControlPoint : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown(0)) {
 			checkSelected();
-			debugCounter++;
-			Debug.Log(debugCounter.ToString());
 		}
-
-		if (lastSpawn >= spawnDelay) {
-			GameObject mob = (GameObject)Instantiate (mobPrefab, transform.position, Quaternion.identity);
-			mob.GetComponent<MobController> ().target = this.gameObject;
-			activeTroops.Add(mob);
-			lastSpawn = 0;
-		} else {
-			lastSpawn += Time.deltaTime;
-		}
-
-		if (lastAnchor >= anchorDelay && controlPointState != ownerControl.InConflict) {
-			GameObject anchor = (GameObject)Instantiate (AnchorPreFab, transform.position, Quaternion.identity);
-			anchor.GetComponent<MobController> ().target = ActiveTarget;
-			List<GameObject> mobWave = activeTroops;
-			lastAnchor = 0;
-			if(mobWave.Count > 0)
-			{
-				foreach(GameObject mob in mobWave)
-				{
-					mob.GetComponent<MobController> ().target = anchor;
-				}
-				activeTroops.Clear();
+		
+		switch(controlPointState)
+		{
+		case ownerControl.Friendly:
+		case ownerControl.Enemy:
+			if (lastSpawn >= spawnDelay) {
+				GameObject mob = (GameObject)Instantiate (mobPrefab, transform.position, Quaternion.identity);
+				mob.GetComponent<MobController> ().friendly = (controlPointState == ownerControl.Friendly);
+				mob.GetComponent<MobController> ().target = this.transform.position;
+				activeTroops.Add(mob);
+				lastSpawn -= spawnDelay;
+			} else {
+				lastSpawn += Time.deltaTime;
 			}
-		} else {
-			lastAnchor += Time.deltaTime;
-		}
+			if (lastAnchor >= anchorDelay) {
+				GameObject anchor = (GameObject)Instantiate (AnchorPreFab, transform.position, Quaternion.identity);
+				anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.transform.position, activeTroops);
+				activeTroops.Clear();
+				lastAnchor = 0;
 			
+			} else {
+				lastAnchor += Time.deltaTime;
+			}
+			break;
+		case ownerControl.InConflict:
+		case ownerControl.Neutral:
+			lastSpawn = 0f;
+			break;
+		}			
 	}
 	void checkSelected()
 	{
@@ -155,6 +200,10 @@ public class ControlPoint : MonoBehaviour {
 					DefendPoint = true;
 					ActiveTarget = this.gameObject;
 					_isSelected = false;
+					foreach( GameObject arrow in arrows)
+					{
+						arrow.SetActive(false);
+					}
 				}
 				else
 				{
@@ -183,8 +232,17 @@ public class ControlPoint : MonoBehaviour {
 					_isSelected = false;
 				}
 			}
-			else
+			else {
+				if (_isSelected) {
+					DefendPoint = true;
+					ActiveTarget = this.gameObject;
+					foreach( GameObject arrow in arrows)
+					{
+						arrow.SetActive(false);
+					}
+				}
 				_isSelected = false;
+			}
 		}
 
 	}
