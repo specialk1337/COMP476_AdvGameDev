@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class ControlPoint : MonoBehaviour {
 
-	private enum ownerControl{Friendly, Neutral, Enemy, InConflict};
+	public enum ownerControl{Friendly, Neutral, Enemy, InConflict};
+	//public enum NPCGoals{Expand, Capture, Enemy, InConflict};
 	private static bool oneSelected = false;
 	private static bool DefendPoint = true; //set True when no forward point and troops should defend this node
 	public float spawnDelay;
@@ -30,9 +31,9 @@ public class ControlPoint : MonoBehaviour {
 	public float controlDistance;
 	public float captureSpeed;
 
-	[SerializeField]ownerControl controlPointState;
+	[SerializeField] public ownerControl controlPointState;
 
-	[SerializeField]private List<GameObject> connectedPoints;
+	[SerializeField]public List<GameObject> connectedPoints;
 	[SerializeField]private List<GameObject> arrows;
 	private List<GameObject> activeTroops;
 
@@ -89,6 +90,11 @@ public class ControlPoint : MonoBehaviour {
 		return arrows;
 	}
 
+	public ownerControl getcontrolPointState()
+	{
+		return controlPointState;
+	}
+
 	void OnTriggerEnter(Collider other) {
 		if (other.CompareTag ("Mob")) {
 			if (controlPointState == ownerControl.Friendly && other.gameObject.GetComponent<MobController>().friendly ||
@@ -98,10 +104,6 @@ public class ControlPoint : MonoBehaviour {
 		}
 	}
 
-	private void arrowSelector()
-	{
-
-	}
 
 	private void buildConnections()
 	{
@@ -155,7 +157,7 @@ public class ControlPoint : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0)) {
 			checkSelected();
 		}
-		
+
 		switch(controlPointState)
 		{
 		case ownerControl.Friendly:
@@ -164,7 +166,7 @@ public class ControlPoint : MonoBehaviour {
 				GameObject mob = (GameObject)Instantiate (mobPrefab, transform.position, Quaternion.identity);
 				mob.GetComponent<MobController> ().friendly = (controlPointState == ownerControl.Friendly);
 				mob.GetComponent<MobController> ().target = this.transform.position;
-				activeTroops.Add(mob);
+				//activeTroops.Add(mob); //I think this addes it 2 time, because it also gets added in the trigger.
 				lastSpawn -= spawnDelay;
 			} else {
 				lastSpawn += Time.deltaTime;
@@ -185,6 +187,12 @@ public class ControlPoint : MonoBehaviour {
 			break;
 		}			
 	}
+
+	public void setArrow(GameObject target)
+	{
+		ActiveTarget = target;
+	}
+	
 	void checkSelected()
 	{
 		RaycastHit hit = new RaycastHit();
@@ -193,7 +201,7 @@ public class ControlPoint : MonoBehaviour {
 
 		if (Physics.Raycast(ray, out hit))
 		{
-			if(hit.transform.gameObject.Equals(this.gameObject))
+			if(hit.transform.gameObject.Equals(this.gameObject) && controlPointState == ownerControl.Friendly)
 			{
 				if(_isSelected)
 				{
