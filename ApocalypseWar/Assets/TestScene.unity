@@ -85,6 +85,7 @@ GameObject:
   - 114: {fileID: 147712720}
   - 65: {fileID: 147712719}
   - 135: {fileID: 147712721}
+  - 23: {fileID: 147712722}
   m_Layer: 0
   m_Name: ControlPointPreFab
   m_TagString: ControlPoint
@@ -133,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDelay: 5
   anchorDelay: 15
-  mobPrefab: {fileID: 100000, guid: 1fd90940e66fec3418d6038c1a8e9de6, type: 2}
+  mobPrefab: {fileID: 100010, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -158,6 +159,28 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.5
   m_Center: {x: 0, y: -.699999988, z: 0}
+--- !u!23 &147712722
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300004, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1288942801}
+  m_GameObject: {fileID: 147712717}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!1 &315494508
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,6 +952,7 @@ GameObject:
   - 114: {fileID: 996625019}
   - 65: {fileID: 996625018}
   - 135: {fileID: 996625021}
+  - 23: {fileID: 996625022}
   m_Layer: 0
   m_Name: ControlPointPreFab
   m_TagString: ControlPoint
@@ -963,7 +987,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDelay: 5
   anchorDelay: 15
-  mobPrefab: {fileID: 100000, guid: 1fd90940e66fec3418d6038c1a8e9de6, type: 2}
+  mobPrefab: {fileID: 100010, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -1001,6 +1025,28 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.5
   m_Center: {x: 0, y: -.699999988, z: 0}
+--- !u!23 &996625022
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300004, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 639221902}
+  m_GameObject: {fileID: 996625017}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!1 &1053082325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,6 +1058,7 @@ GameObject:
   - 114: {fileID: 1053082329}
   - 65: {fileID: 1053082328}
   - 135: {fileID: 1053082327}
+  - 23: {fileID: 1053082330}
   m_Layer: 0
   m_Name: ControlPointPreFab
   m_TagString: ControlPoint
@@ -1073,7 +1120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDelay: 5
   anchorDelay: 15
-  mobPrefab: {fileID: 100000, guid: 1fd90940e66fec3418d6038c1a8e9de6, type: 2}
+  mobPrefab: {fileID: 100010, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -1085,6 +1132,88 @@ MonoBehaviour:
   - {fileID: 2097289661}
   - {fileID: 1801878657}
   arrows: []
+--- !u!23 &1053082330
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300004, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1094939011}
+  m_GameObject: {fileID: 1053082325}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+--- !u!1001 &1094939011
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 11400000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+      propertyPath: connectedPoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 7.03884745
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: .416385949
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 6.6630249
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+      propertyPath: connectedPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 147712717}
+    - target: {fileID: 11400000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+      propertyPath: connectedPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 2097289661}
+    - target: {fileID: 11400000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+      propertyPath: connectedPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1801878657}
+    - target: {fileID: 11400000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+      propertyPath: controlPointState
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee, type: 2}
+  m_RootGameObject: {fileID: 1053082325}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1232739283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,6 +1927,7 @@ GameObject:
   - 114: {fileID: 1801878660}
   - 65: {fileID: 1801878659}
   - 135: {fileID: 1801878658}
+  - 23: {fileID: 1801878662}
   m_Layer: 0
   m_Name: ControlPointPreFab
   m_TagString: ControlPoint
@@ -1845,7 +1975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDelay: 5
   anchorDelay: 15
-  mobPrefab: {fileID: 100000, guid: 1fd90940e66fec3418d6038c1a8e9de6, type: 2}
+  mobPrefab: {fileID: 100010, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -1871,6 +2001,28 @@ Transform:
   - {fileID: 1244700653}
   - {fileID: 1232739284}
   m_Father: {fileID: 0}
+--- !u!23 &1801878662
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300004, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1278486573}
+  m_GameObject: {fileID: 1801878657}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!1 &2071717873
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,6 +2106,7 @@ GameObject:
   - 114: {fileID: 2097289664}
   - 65: {fileID: 2097289663}
   - 135: {fileID: 2097289665}
+  - 23: {fileID: 2097289666}
   m_Layer: 0
   m_Name: ControlPointPreFab
   m_TagString: ControlPoint
@@ -2002,7 +2155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDelay: 5
   anchorDelay: 15
-  mobPrefab: {fileID: 100000, guid: 1fd90940e66fec3418d6038c1a8e9de6, type: 2}
+  mobPrefab: {fileID: 100010, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -2027,3 +2180,25 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.5
   m_Center: {x: 0, y: -.699999988, z: 0}
+--- !u!23 &2097289666
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300004, guid: 9bcc8ecc46b9c9341a317d205dc2a8ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 469202265}
+  m_GameObject: {fileID: 2097289661}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
