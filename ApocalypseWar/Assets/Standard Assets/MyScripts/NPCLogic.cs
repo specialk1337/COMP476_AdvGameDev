@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class NPCLogic : MonoBehaviour {
 
 	private List<GameObject> EnemyCP = new List<GameObject>();
+
+	static private GameObject priorityTarget;
 	// Use this for initialization
 	void Start () {
 
@@ -18,15 +20,22 @@ public class NPCLogic : MonoBehaviour {
 		/* Basic AI to set arrow to first Not controlled Node */
 		foreach(GameObject CP in EnemyCP)
 		{
-			foreach(GameObject destination in CP.GetComponent<ControlPoint>().connectedPoints)
-			{
-				if(destination.GetComponent<ControlPoint>().controlPointState == ControlPoint.ownerControl.Neutral)
+			//if(priorityTarget.GetComponent<ControlPoint>().controlPointState == ControlPoint.ownerControl.Enemy)
+		//	{
+				foreach(GameObject destination in CP.GetComponent<ControlPoint>().connectedPoints)
 				{
-					CP.GetComponent<ControlPoint>().setArrow(destination);
+					if(destination.GetComponent<ControlPoint>().controlPointState == ControlPoint.ownerControl.Friendly)
+					{
+						priorityTarget = destination;
+						CP.GetComponent<ControlPoint>().setArrow(destination);
+					}
+
+					if(destination.GetComponent<ControlPoint>().controlPointState == ControlPoint.ownerControl.Neutral)
+					{
+						CP.GetComponent<ControlPoint>().setArrow(destination);
+					}
 				}
-			}
+		//	}
 		}
 	}
-
-
 }
