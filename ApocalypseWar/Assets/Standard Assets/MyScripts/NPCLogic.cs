@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class NPCLogic : MonoBehaviour {
-
+	/*
 	private List<GameObject> EnemyCP = new List<GameObject>();
 
 	static private GameObject priorityTarget;
@@ -17,7 +17,7 @@ public class NPCLogic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		/* Basic AI to set arrow to first Not controlled Node */
+		// Basic AI to set arrow to first Not controlled Node
 		foreach(GameObject CP in EnemyCP)
 		{
 			//if(priorityTarget.GetComponent<ControlPoint>().controlPointState == ControlPoint.ownerControl.Enemy)
@@ -37,5 +37,5 @@ public class NPCLogic : MonoBehaviour {
 				}
 		//	}
 		}
-	}
+	}*/
 }

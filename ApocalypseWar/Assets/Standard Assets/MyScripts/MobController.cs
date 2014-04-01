@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class MobController : MonoBehaviour {
-	public Vector3 target;
-	private Vector3 targetPoint;/*Kevin*/
+	public Vector3 target; // actual target, change this when changing target
+	private Vector3 targetPoint;/*Kevin*/ // modified by flocking, don't change this
 	public bool flee;
 	
 	public float maxVelocity;
@@ -28,16 +28,26 @@ public class MobController : MonoBehaviour {
 	public float idleTimer;
 	public float deathDelay;
 	public float deathTimer;
+	
+	public float separationWeight;
+	public float alignmentWeight;
+	public float cohesionWeight;
+
+	public GameObject closestEnemy;
+	public Vector3 separation;
+	public Vector3 alignment;
+	public Vector3 cohesion;
+	public float flockDistance;
 
 	// Use this for initialization
 	void Start () {
 		velocity = new Vector3 (0, 0, 0);
-		targetPoint = this.transform.position;
+		target = transform.position;
 
 		currentHitPoints = maxHitPoints = 30;
-		attackPower = 15;
+		attackPower = 20;
 		damageVariance = 0.2f;
-		attackDelay = 1f;
+		attackDelay = 0.5f;
 		attackRange = 2f;
 		dodgeChance = 0.1f;
 		armor = 0f;
@@ -46,6 +56,11 @@ public class MobController : MonoBehaviour {
 		idleTimer = 0f;
 		deathDelay = 3f;
 		deathTimer = 0f;
+		
+		separationWeight = 0.7f;
+		alignmentWeight = 0.1f;
+		cohesionWeight = 0.3f;
+		flockDistance = 2f;
 	}
 	
 	// Update is called once per frame
@@ -59,22 +74,94 @@ public class MobController : MonoBehaviour {
 			Die();
 		}
 
-		// if the code below is uncommented instead of "Move(t);", only the red team moves+?
+		closestEnemy = FindClosestEnemy ();
 
-		GameObject enemy = FindClosestEnemy ();
-		if (enemy != null && Vector3.Distance (transform.position, enemy.transform.position) < attackRange) {
-			Attack(enemy, t);
+		if (closestEnemy != null && Vector3.Distance (transform.position, closestEnemy.transform.position) < attackRange) {
+			Attack(closestEnemy, t);
 		} else {
+			Flock();
 			Move(t);
 		}
-		//Move(t); // comment this out if uncommenting the block above
+	}
+	/*
+	void OnTriggerEnter(Collider other) {
+		if (other.gameObject.CompareTag ("Mob")) {
+			//if (!mobsInRange.Contains(other.gameObject)) {
+				mobsInRange.Add(other.gameObject);
+			//}
+		}
+
+	}
+	
+	void OnTriggerExit(Collider other) {
+		if (other.gameObject.CompareTag ("Mob")) {
+			//if (mobsInRange.Contains(other.gameObject)) {
+				mobsInRange.Remove(other.gameObject);
+			//}
+		}
+		
+	}
+	*/
+	private void Flock() {
+		separation = Vector3.zero;
+		alignment = Vector3.zero;
+		cohesion = Vector3.zero;
+		Vector3 v = Vector3.zero;
+
+		GameObject[] mobs = GameObject.FindGameObjectsWithTag("Mob");
+		int friendlyCount = 0;
+
+		foreach (GameObject mob in mobs) {
+			if (!gameObject.Equals(mob.gameObject)) {
+				v = (transform.position - mob.transform.position);
+				float mag = v.magnitude;
+				if (mag < flockDistance) {
+					// separation
+					v = v.normalized * (1 / (mag + 0.01f));
+					separation += v;
+					
+					// friendly mobs only
+					if (friendly == mob.GetComponent<MobController>().friendly) {
+						// alignment
+						alignment += mob.transform.forward;
+						
+						// cohesion
+						cohesion += mob.transform.position;
+						
+						++friendlyCount;
+					}
+				}
+			}
+		}
+		
+		separation = Vector3.ClampMagnitude(separation, maxVelocity);
+
+		if (alignment != Vector3.zero) {
+			alignment.Normalize();
+		}
+		
+		if (friendlyCount > 0) {
+			cohesion /= friendlyCount;
+			cohesion -= transform.position;
+			cohesion = Vector3.ClampMagnitude(cohesion, maxVelocity);
+		}
+		/*
+		Debug.Log (separation);
+		Debug.Log (alignment);
+		Debug.Log (cohesion);
+		*/
+		velocity = Vector3.ClampMagnitude(target - transform.position, maxVelocity);
+		velocity += separation * separationWeight + alignment * alignmentWeight + cohesion * cohesionWeight;
+		velocity = Vector3.ClampMagnitude(velocity, maxVelocity);
+		targetPoint = transform.position + velocity;
+
 	}
 
 	private GameObject FindClosestEnemy() {
-		GameObject[] mobs = GameObject.FindGameObjectsWithTag ("Mob");
-		GameObject enemy = mobs[0]; // to stop the compiler from complaining
+		GameObject[] mobs = GameObject.FindGameObjectsWithTag("Mob");
+		GameObject enemy = closestEnemy;
 		float distance = float.MaxValue;
-		if (mobs != null && mobs.Length > 0) {
+		if (mobs.Length > 0) {
 			foreach (GameObject m in mobs) {
 				if (m != null && m.GetComponent<MobController>() != null && friendly != m.GetComponent<MobController>().friendly) {
 					float d = (m.transform.position - gameObject.transform.position).magnitude;
@@ -121,12 +208,12 @@ public class MobController : MonoBehaviour {
 
 		attackTimer = 0f;
 
-		/* Handle if the anchor gets deleted - Kevin*/
+		/* Handle if the anchor gets deleted - Kevin
 		if(target != null)
 		{
 			targetPoint = target;
 		}
-		
+		*/
 		KinematicArrive (targetPoint, t);
 		
 		if (velocity.magnitude > 0) {

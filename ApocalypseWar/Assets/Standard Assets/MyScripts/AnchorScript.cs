@@ -12,15 +12,10 @@ public class AnchorScript : MonoBehaviour {
 	public float maxSpeed;
 	//public float t2t;
 	private Vector3 velocity;
-	public float separationWeight;
-	public float alignmentWeight;
-	public float cohesionWeight;
 
 	// Use this for initialization
 	void Start () {
-		separationWeight = 0.1f;
-		alignmentWeight = 0.1f;
-		cohesionWeight = 0.2f;
+
 	}
 
 	public void initilize(Vector3 Destination, List<GameObject> formationObjects)
@@ -47,7 +42,7 @@ public class AnchorScript : MonoBehaviour {
 	private void formations()
 	{
 		/* Basic formation 4xN*/
-		/*
+
 		int numTroops = _formationObjects.Count;
 
 		for(int n = 0; n < numTroops/4; ++n)
@@ -61,50 +56,6 @@ public class AnchorScript : MonoBehaviour {
 				}
 				objNum++;
 			}
-		}
-		*/
-
-		Vector3 separation = Vector3.zero;
-		Vector3 alignment = Vector3.zero;
-		Vector3 cohesion = Vector3.zero;
-		Vector3 v = Vector3.zero;
-
-		// o = current mob, n = neighbor mobs
-		foreach (GameObject o in _formationObjects) {
-			foreach (GameObject n in _formationObjects) {
-				if (!o.Equals(n)) {
-					// separation
-					v = (o.transform.position - n.transform.position);
-					float mag = v.magnitude;
-					v = v.normalized * (1 / (mag + 0.01f));
-					separation += v;
-
-					// alignment
-					if (n.GetComponent<MobController>().velocity.magnitude > 0.1f) {
-						alignment += n.GetComponent<MobController>().velocity.normalized;
-					}
-					
-					// cohesion
-					cohesion += n.transform.position;
-				}
-			}
-
-			Vector3.ClampMagnitude(separation, o.GetComponent<MobController>().maxVelocity);
-
-			alignment.Normalize();
-
-			if (_formationObjects.Count > 1) {
-				cohesion /= (float)(_formationObjects.Count - 1);
-			}
-			cohesion -= o.transform.position;
-
-			Debug.Log (separation);
-			Debug.Log (alignment);
-			Debug.Log (cohesion);
-
-			o.GetComponent<MobController>().velocity = Vector3.ClampMagnitude(_destination - o.transform.position, o.GetComponent<MobController>().maxVelocity);
-			o.GetComponent<MobController>().velocity += separation * separationWeight + alignment * alignmentWeight + cohesion * cohesionWeight;
-			o.GetComponent<MobController>().target = o.transform.position + o.GetComponent<MobController>().velocity;
 		}
 
 
