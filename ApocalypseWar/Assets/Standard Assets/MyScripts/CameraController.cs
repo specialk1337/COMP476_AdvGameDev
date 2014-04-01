@@ -4,10 +4,12 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 	private bool mouselook;
 	private Vector3 prevMousePos;
+	public float zoomSpeed;
 
 	// Use this for initialization
 	void Start () {
 		mouselook = false;
+		zoomSpeed = 500f;
 	}
 	
 	// Update is called once per frame
@@ -26,6 +28,10 @@ public class CameraController : MonoBehaviour {
 			newCameraPos.z -= (Input.mousePosition.y - prevMousePos.y) / 10;
 			transform.position = newCameraPos;
 			prevMousePos = Input.mousePosition;
+		}
+
+		if (Input.GetAxis("Mouse ScrollWheel") != 0) {
+			transform.position += transform.forward * Input.GetAxis("Mouse ScrollWheel") * zoomSpeed * Time.deltaTime;
 		}
 	}
 }
