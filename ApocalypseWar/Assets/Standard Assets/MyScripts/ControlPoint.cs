@@ -25,6 +25,7 @@ public class ControlPoint : MonoBehaviour {
 	private float BaseLightIntensity;
 	private float lastSpawn;
 	private float lastAnchor;
+	private float ActiveRadius = 4; //Find all troops inside this distance
 
 	public float controlCounter; // range [-1, 1] from enemy to friendly
 	public float controlDistance;
@@ -90,14 +91,14 @@ public class ControlPoint : MonoBehaviour {
 		return arrows;
 	}
 
-	void OnTriggerEnter(Collider other) {
+	/*void OnTriggerEnter(Collider other) {
 		if (other.CompareTag ("Mob")) {
 			if (controlPointState == ownerControl.Friendly && other.gameObject.GetComponent<MobController>().friendly ||
 			    controlPointState == ownerControl.Enemy && !other.gameObject.GetComponent<MobController>().friendly) {
 				activeTroops.Add(other.gameObject);
 			}
 		}
-	}
+	}*/
 
 	private void arrowSelector()
 	{
@@ -137,6 +138,8 @@ public class ControlPoint : MonoBehaviour {
 
 		UpdateControlState (Time.deltaTime);
 
+
+
 		switch(controlPointState)
 		{
 		case ownerControl.Enemy:
@@ -163,39 +166,73 @@ public class ControlPoint : MonoBehaviour {
 		case ownerControl.Enemy:
 			if (lastSpawn >= spawnDelay) {
 				Vector3 v = new Vector3 (Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f));
-				GameObject mob = (GameObject)Instantiate (mobPrefab, transform.position + v, Quaternion.identity);
+				GameObject mob = (GameObject)Instantiate (mobPrefab, new Vector3(transform.position.x, 0f, transform.position.z)+v, Quaternion.identity);
 				mob.GetComponent<MobController> ().friendly = (controlPointState == ownerControl.Friendly);
-				mob.GetComponent<MobController> ().target = this.transform.position;
+				mob.GetComponent<MobController> ().target = getStandLocation();
 				//activeTroops.Add(mob);
 				lastSpawn -= spawnDelay;
 			} else {
 				lastSpawn += Time.deltaTime;
 			}
-			if (lastAnchor >= anchorDelay) {
-				activeTroops.Clear();
-				GameObject[] mobs = GameObject.FindGameObjectsWithTag ("Mob");
-				float distance;
-				foreach (GameObject m in mobs) {
-					distance = (m.transform.position - gameObject.transform.position).magnitude;
-					if (distance < controlDistance &&
-					    controlPointState == ownerControl.Friendly && m.GetComponent<MobController>().friendly ||
-					    controlPointState == ownerControl.Enemy && !m.GetComponent<MobController>().friendly) {
-						activeTroops.Add (m);
-					}
-				}
-				GameObject anchor = (GameObject)Instantiate (AnchorPreFab, transform.position, Quaternion.identity);
-				anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.transform.position, activeTroops);
-				lastAnchor = 0;
-			
-			} else {
-				lastAnchor += Time.deltaTime;
-			}
+			runAnchor();
 			break;
 		case ownerControl.InConflict:
 		case ownerControl.Neutral:
 			lastSpawn = 0f;
 			break;
 		}			
+	}
+
+	private Vector3 getStandLocation()
+	{
+		Vector3 standAt = transform.position;
+
+		Vector3 position = new Vector3(Random.Range(-4.0F, 4.0F), 0, Random.Range(-4.0F, 4.0F));
+		Vector3 direction = standAt - (position+standAt);
+
+		standAt = direction.normalized;
+
+
+		standAt = standAt * Random.Range (1.5F, 4.0F);
+		return standAt;
+	}
+
+	private void runAnchor()
+	{
+		if (lastAnchor >= anchorDelay) {
+			Collider[] hitColliders = Physics.OverlapSphere(transform.position, ActiveRadius);
+			activeTroops.Clear();
+			/*GameObject[] mobs = GameObject.FindGameObjectsWithTag ("Mob");
+			float distance;
+			foreach (GameObject m in mobs) {
+				distance = (m.transform.position - gameObject.transform.position).magnitude;
+				if (distance < controlDistance &&
+				    controlPointState == ownerControl.Friendly && m.GetComponent<MobController>().friendly ||
+				    controlPointState == ownerControl.Enemy && !m.GetComponent<MobController>().friendly) {
+					activeTroops.Add (m);
+				}
+			}*/
+			if(hitColliders.Length>0)
+			{
+				foreach(Collider inRangeUnit in hitColliders)
+				{
+					if(inRangeUnit.transform.tag == "Mob")
+					{
+						if(	controlPointState == ownerControl.Friendly && inRangeUnit.gameObject.GetComponent<MobController>().friendly ||
+							controlPointState == ownerControl.Enemy && !inRangeUnit.gameObject.GetComponent<MobController>().friendly) 
+						{
+							activeTroops.Add (inRangeUnit.gameObject);
+						}
+					}
+				}
+				GameObject anchor = (GameObject)Instantiate (AnchorPreFab, transform.position, Quaternion.identity);
+				anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.transform.position, activeTroops);
+				lastAnchor = 0;
+			}
+			
+		} else {
+			lastAnchor += Time.deltaTime;
+		}
 	}
 	void checkSelected()
 	{

@@ -163,6 +163,7 @@ GameObject:
   - 4: {fileID: 400018}
   - 111: {fileID: 11100000}
   - 65: {fileID: 6500000}
+  - 23: {fileID: 2300020}
   m_Layer: 0
   m_Name: c_Structure
   m_TagString: Untagged
@@ -196,7 +197,6 @@ GameObject:
   - 4: {fileID: 400022}
   - 114: {fileID: 11400000}
   - 65: {fileID: 6500002}
-  - 135: {fileID: 13500000}
   - 23: {fileID: 2300018}
   m_Layer: 0
   m_Name: ControlPointPreFab_D
@@ -311,7 +311,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.03428316, z: 0}
   m_LocalScale: {x: .5, y: .5, z: .5}
   m_Children:
   - {fileID: 400008}
@@ -342,7 +342,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.4075928, y: 2, z: -13.1948242}
+  m_LocalPosition: {x: -15.4075928, y: 2.29019165, z: -13.1948242}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 400020}
@@ -558,6 +558,27 @@ Renderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
+--- !u!23 &2300020
+Renderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100018}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &3300000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -713,24 +734,12 @@ MonoBehaviour:
   controlCounter: 0
   controlDistance: 0
   captureSpeed: 0
-  controlPointState: 2
+  controlPointState: 1
   connectedPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   arrows: []
---- !u!135 &13500000
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100022}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: -.699999988, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

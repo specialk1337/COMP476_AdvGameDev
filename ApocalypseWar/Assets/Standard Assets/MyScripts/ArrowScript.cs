@@ -17,13 +17,13 @@ public class ArrowScript : MonoBehaviour {
 	public void initilize(GameObject pointAt, Vector3 pointFrom)
 	{
 
-		float scale = 3.5f;
+		float scale = 2.5f;
 		pointingAt = pointAt;
 		//transform.localPosition = pointFrom;
 		//Vector3 direction = pointFrom - pointAt;
 		Vector3 direction = pointAt.transform.position - pointFrom;
 		direction = direction.normalized;
-		transform.localPosition = new Vector3(scale*direction.x, transform.position.y, scale*direction.z);
+		transform.localPosition = new Vector3(scale*direction.x, 0, scale*direction.z);
 		//transform.position.z += direction.z;
 		transform.LookAt (pointAt.transform.position);
 	}

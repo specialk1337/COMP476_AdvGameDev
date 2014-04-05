@@ -13,7 +13,7 @@ public class MobController : MonoBehaviour {
 	public float turnSpeed;
 	
 	public Vector3 velocity;
-
+	
 	public bool friendly;
 	public int maxHitPoints;
 	public int currentHitPoints;

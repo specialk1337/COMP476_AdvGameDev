@@ -1836,6 +1836,14 @@ MonoBehaviour:
   idleTimer: 0
   deathDelay: 0
   deathTimer: 0
+  separationWeight: 0
+  alignmentWeight: 0
+  cohesionWeight: 0
+  closestEnemy: {fileID: 0}
+  separation: {x: 0, y: 0, z: 0}
+  alignment: {x: 0, y: 0, z: 0}
+  cohesion: {x: 0, y: 0, z: 0}
+  flockDistance: 0
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
