@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class MobController : MonoBehaviour {
+
+	public GameObject textPrefab;
+
 	public Vector3 target; // actual target, change this when changing target
 	private Vector3 targetPoint;/*Kevin*/ // modified by flocking, don't change this
 	public bool flee;
@@ -22,6 +25,7 @@ public class MobController : MonoBehaviour {
 	public float attackDelay; // seconds per attack
 	public float attackTimer; // attack cooldown time
 	public float attackRange; // attack range
+	public float aggroRange; // range to react to an enemy
 	public float dodgeChance; // % chance to avoid an attack, range [0, 1]
 	public float armor; // % damage reduction, range [0, 1]
 	public float idleDelay;
@@ -45,42 +49,55 @@ public class MobController : MonoBehaviour {
 		target = transform.position;
 
 		currentHitPoints = maxHitPoints = 30;
-		attackPower = 20;
+		attackPower = 10;
 		damageVariance = 0.2f;
-		attackDelay = 0.5f;
-		attackRange = 2f;
+		attackDelay = 3f;
+		attackRange = 3f;
+		aggroRange = 6f;
 		dodgeChance = 0.1f;
 		armor = 0f;
 
-		idleDelay = 0.1f;
+		idleDelay = 0.25f;
 		idleTimer = 0f;
-		deathDelay = 3f;
+		deathDelay = 2.33f;
 		deathTimer = 0f;
 		
-		separationWeight = 0.7f;
+		separationWeight = 1f;
 		alignmentWeight = 0.1f;
-		cohesionWeight = 0.3f;
-		flockDistance = 2f;
+		cohesionWeight = 0.1f;
+		flockDistance = 3f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material.color = friendly ? Color.green : Color.red;
+		Material[] materials = gameObject.GetComponentInChildren<SkinnedMeshRenderer>().materials;
+
+		// body color
+		materials[0].color = friendly ? Color.green : Color.red;
+		// head color
+		materials[1].color = Color.Lerp(Color.black, Color.white, currentHitPoints / (float)maxHitPoints);
 		
 		float t = Time.deltaTime;
 
 		if (currentHitPoints <= 0) {
 			Die();
-		}
-
-		closestEnemy = FindClosestEnemy ();
-
-		if (closestEnemy != null && Vector3.Distance (transform.position, closestEnemy.transform.position) < attackRange) {
-			Attack(closestEnemy, t);
 		} else {
-			Flock();
-			Move(t);
+			
+			closestEnemy = FindClosestEnemy ();
+			
+			if (closestEnemy != null) {
+				float distance = Vector3.Distance(transform.position, closestEnemy.transform.position);
+				if (distance < attackRange) {
+					Attack(closestEnemy, t);
+				} else {
+					if (distance < aggroRange) {
+						target = closestEnemy.transform.position;
+					}
+					Flock();
+					Move(t);
+				}
+			} 
 		}
 	}
 	/*
@@ -163,7 +180,8 @@ public class MobController : MonoBehaviour {
 		float distance = float.MaxValue;
 		if (mobs.Length > 0) {
 			foreach (GameObject m in mobs) {
-				if (m != null && m.GetComponent<MobController>() != null && friendly != m.GetComponent<MobController>().friendly) {
+				if (m != null && m.GetComponent<MobController>() != null && friendly != m.GetComponent<MobController>().friendly &&
+				    m.GetComponent<MobController>().currentHitPoints > 0) {
 					float d = (m.transform.position - gameObject.transform.position).magnitude;
 					if (d < distance) {
 						distance = d;
@@ -185,10 +203,17 @@ public class MobController : MonoBehaviour {
 			if (Random.Range(0f, 1f) > enemy.dodgeChance) {
 				// variable damage, minimum 1
 				float variance = Random.Range(1f - damageVariance, 1f + damageVariance);
-				int damage = Mathf.Min(1, Mathf.RoundToInt(attackPower * variance * (1f - enemy.armor)));
+				int damage = Mathf.Max(1, Mathf.RoundToInt(attackPower * variance * (1f - enemy.armor)));
 				enemy.currentHitPoints -= damage;
+				//enemy.animation.Play("gethit");
+				GameObject damageDisplay = (GameObject)Instantiate (textPrefab, enemy.transform.position, Quaternion.identity);
+				damageDisplay.GetComponent<TextScript>().Init(damage.ToString(), Color.yellow);
+				//damageDisplay.transform.position += damageDisplay.transform.up * 2f;
 			} else {
 				// miss
+				GameObject damageDisplay = (GameObject)Instantiate (textPrefab, enemy.transform.position, Quaternion.identity);
+				damageDisplay.GetComponent<TextScript>().Init("miss", Color.white);
+				//damageDisplay.transform.position += damageDisplay.transform.up * 2f;
 			}
 		}
 		attackTimer -= t;
@@ -230,7 +255,7 @@ public class MobController : MonoBehaviour {
 			idleTimer = 0f;
 		}
 		if (idleTimer >= idleDelay)
-			animation.Play ("idle");
+			animation.Play ("waitingforbattle");
 		else
 			animation.Play ("run");
 	}
