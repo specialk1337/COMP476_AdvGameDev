@@ -30,6 +30,8 @@ public class ControlPoint : MonoBehaviour {
 	public float controlCounter; // range [-1, 1] from enemy to friendly
 	public float controlDistance;
 	public float captureSpeed;
+	public float colorFlashSpeed;
+	private float colorFlashCounter;
 
 	[SerializeField]ownerControl controlPointState;
 
@@ -60,13 +62,14 @@ public class ControlPoint : MonoBehaviour {
 				newArrow.SetActive(false);
 			}
 		}
-		c_light.light.color = Color.white;
+		//c_light.light.color = Color.white;
 		BaseLightIntensity = c_light.light.intensity;
-		SelectedLightIntensity = BaseLightIntensity + 1.75f;
+		SelectedLightIntensity = BaseLightIntensity + 3f;
 		_isSelected = false;
 
 		controlDistance = 3f;
 		captureSpeed = 0.1f;
+		colorFlashSpeed = 3f;
 
 		// state chosen manually in inspector
 		switch (controlPointState)
@@ -132,25 +135,31 @@ public class ControlPoint : MonoBehaviour {
 			controlPointState = ownerControl.InConflict;
 		}
 	}
+
+	private void SetColor(Color c) {
+		c_light.light.color = c;
+	}
 	
 	// Update is called once per frame
 	void Update () {
 
 		UpdateControlState (Time.deltaTime);
 
-
+		colorFlashCounter += colorFlashSpeed * Time.deltaTime;
 
 		switch(controlPointState)
 		{
 		case ownerControl.Enemy:
-			c_object.renderer.material.color = Color.red;
+			SetColor(Color.red);
 			break;
 		case ownerControl.Friendly:
-			c_object.renderer.material.color = Color.green;
+			SetColor(Color.green);
 			break;
 		case ownerControl.Neutral:
+			SetColor (Color.yellow);
+			break;
 		case ownerControl.InConflict:
-			c_object.renderer.material.color = Color.Lerp(Color.red, Color.green, (controlCounter + 1) / 2f);
+			SetColor(Color.Lerp(Color.yellow, (controlCounter > 0f ? Color.green : Color.red), Mathf.Sin(colorFlashCounter)));
 			break;
 		}
 
@@ -225,7 +234,7 @@ public class ControlPoint : MonoBehaviour {
 						}
 					}
 				}
-				GameObject anchor = (GameObject)Instantiate (AnchorPreFab, transform.position, Quaternion.identity);
+				GameObject anchor = (GameObject)Instantiate (AnchorPreFab, new Vector3(transform.position.x, 0f, transform.position.z), Quaternion.identity);
 				anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.transform.position, activeTroops);
 				lastAnchor = 0;
 			}

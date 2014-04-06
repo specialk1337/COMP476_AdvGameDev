@@ -783,14 +783,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941922f378fd97844805a8e4112c5d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelay: 3
-  anchorDelay: 7
+  spawnDelay: 5
+  anchorDelay: 10
   mobPrefab: {fileID: 100010, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
   controlDistance: 0
   captureSpeed: 0
+  colorFlashSpeed: 0
   controlPointState: 1
   connectedPoints:
   - {fileID: 0}
