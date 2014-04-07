@@ -33,6 +33,10 @@ public class ControlPoint : MonoBehaviour {
 	public float colorFlashSpeed;
 	private float colorFlashCounter;
 
+	public int healAmount;
+	public float healDelay;
+	private float healCounter;
+
 	[SerializeField]ownerControl controlPointState;
 
 	[SerializeField]private List<GameObject> connectedPoints;
@@ -67,10 +71,6 @@ public class ControlPoint : MonoBehaviour {
 		SelectedLightIntensity = BaseLightIntensity + 3f;
 		_isSelected = false;
 
-		controlDistance = 3f;
-		captureSpeed = 0.1f;
-		colorFlashSpeed = 3f;
-
 		// state chosen manually in inspector
 		switch (controlPointState)
 		{
@@ -87,6 +87,11 @@ public class ControlPoint : MonoBehaviour {
 
 		buildConnections ();
 
+		healCounter += Time.deltaTime;
+		if (healCounter >= healDelay) {
+			healCounter -= healDelay;
+			healMobs(healAmount);
+		}
 	}
 
 	public List<GameObject> getArrows()
@@ -176,7 +181,7 @@ public class ControlPoint : MonoBehaviour {
 			if (lastSpawn >= spawnDelay) {
 				Vector3 v = new Vector3 (Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f));
 				GameObject mob = (GameObject)Instantiate (mobPrefab, new Vector3(transform.position.x, 0f, transform.position.z)+v, Quaternion.identity);
-				mob.GetComponent<MobController> ().friendly = (controlPointState == ownerControl.Friendly);
+				mob.GetComponent<MobController> ().Init(controlPointState == ownerControl.Friendly);
 				mob.GetComponent<MobController> ().target = getStandLocation();
 				//activeTroops.Add(mob);
 				lastSpawn -= spawnDelay;
@@ -189,7 +194,28 @@ public class ControlPoint : MonoBehaviour {
 		case ownerControl.Neutral:
 			lastSpawn = 0f;
 			break;
-		}			
+		}
+	}
+
+	public void healMobs(int amount) {
+		Collider[] hitColliders = Physics.OverlapSphere(transform.position, ActiveRadius);
+		if(hitColliders.Length>0)
+		{
+			foreach(Collider inRangeUnit in hitColliders)
+			{
+				if(inRangeUnit.transform.tag == "Mob")
+				{
+					if(	controlPointState == ownerControl.Friendly && inRangeUnit.gameObject.GetComponent<MobController>().friendly ||
+					   controlPointState == ownerControl.Enemy && !inRangeUnit.gameObject.GetComponent<MobController>().friendly) 
+					{
+						inRangeUnit.gameObject.GetComponent<MobController>().HealDamage(amount);
+					}
+				}
+			}
+			GameObject anchor = (GameObject)Instantiate (AnchorPreFab, new Vector3(transform.position.x, 0f, transform.position.z), Quaternion.identity);
+			anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.transform.position, activeTroops);
+			lastAnchor = 0;
+		}
 	}
 
 	private Vector3 getStandLocation()
