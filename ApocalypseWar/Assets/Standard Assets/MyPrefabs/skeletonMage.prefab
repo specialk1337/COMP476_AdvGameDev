@@ -247,7 +247,7 @@ GameObject:
   - 136: {fileID: 13600000}
   m_Layer: 0
   m_Name: skeletonMage
-  m_TagString: Untagged
+  m_TagString: Mob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1123,7 +1123,7 @@ Transform:
   m_GameObject: {fileID: 100024}
   m_LocalRotation: {x: 0, y: -.965210259, z: 0, w: .261475176}
   m_LocalPosition: {x: .0116130104, y: .514642715, z: -7.55644512}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 400098}
   - {fileID: 400100}
@@ -2128,27 +2128,25 @@ MonoBehaviour:
   turnSpeed: 3
   velocity: {x: 0, y: 0, z: 0}
   friendly: 0
-  maxHitPoints: 0
-  currentHitPoints: 0
-  attackPower: 0
-  damageVariance: 0
-  attackDelay: 0
-  attackTimer: 0
-  attackRange: 0
-  dodgeChance: 0
-  armor: 0
-  idleDelay: 0
-  idleTimer: 0
-  deathDelay: 0
-  deathTimer: 0
-  separationWeight: 0
-  alignmentWeight: 0
-  cohesionWeight: 0
+  maxHitPoints: 30
+  currentHitPoints: 30
+  attackPower: 15
+  damageVariance: .400000006
+  attackDelay: 3
+  attackRange: 8
+  aggroRange: 8
+  dodgeChance: .200000003
+  armor: .200000003
+  idleDelay: .25
+  deathDelay: 2.32999992
+  separationWeight: 1
+  alignmentWeight: .100000001
+  cohesionWeight: .100000001
+  flockDistance: 3
   closestEnemy: {fileID: 0}
   separation: {x: 0, y: 0, z: 0}
   alignment: {x: 0, y: 0, z: 0}
   cohesion: {x: 0, y: 0, z: 0}
-  flockDistance: 0
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

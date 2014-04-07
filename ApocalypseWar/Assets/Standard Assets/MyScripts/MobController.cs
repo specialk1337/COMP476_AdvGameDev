@@ -23,61 +23,47 @@ public class MobController : MonoBehaviour {
 	public int attackPower; // hp damage, attacks are assumed to be 100% accurate
 	public float damageVariance; // % of damage variation each attack, [0, 1]
 	public float attackDelay; // seconds per attack
-	public float attackTimer; // attack cooldown time
+	private float attackTimer; // attack cooldown time
 	public float attackRange; // attack range
 	public float aggroRange; // range to react to an enemy
 	public float dodgeChance; // % chance to avoid an attack, range [0, 1]
 	public float armor; // % damage reduction, range [0, 1]
 	public float idleDelay;
-	public float idleTimer;
+	private float idleTimer;
 	public float deathDelay;
-	public float deathTimer;
+	private float deathTimer;
 	
 	public float separationWeight;
 	public float alignmentWeight;
 	public float cohesionWeight;
+	public float flockDistance;
 
 	public GameObject closestEnemy;
 	public Vector3 separation;
 	public Vector3 alignment;
 	public Vector3 cohesion;
-	public float flockDistance;
 
 	// Use this for initialization
 	void Start () {
-		velocity = new Vector3 (0, 0, 0);
+		velocity = Vector3.zero;
 		target = transform.position;
+	}
 
-		currentHitPoints = maxHitPoints = 30;
-		attackPower = 10;
-		damageVariance = 0.2f;
-		attackDelay = 3f;
-		attackRange = 3f;
-		aggroRange = 6f;
-		dodgeChance = 0.1f;
-		armor = 0f;
-
-		idleDelay = 0.25f;
-		idleTimer = 0f;
-		deathDelay = 2.33f;
-		deathTimer = 0f;
-		
-		separationWeight = 1f;
-		alignmentWeight = 0.1f;
-		cohesionWeight = 0.1f;
-		flockDistance = 3f;
+	public void Init(bool friendly) {
+		this.friendly = friendly;
+		MeshRenderer[] meshRenderers = gameObject.transform.FindChild("Bip01").gameObject.GetComponentsInChildren<MeshRenderer>();
+		foreach (MeshRenderer mr in meshRenderers) {
+			mr.material.color = friendly ? Color.green : Color.red;
+		}
+		// body color
+		//materials[0].color = friendly ? Color.green : Color.red;
+		// head color
+		//materials[1].color = Color.Lerp(Color.black, Color.white, currentHitPoints / (float)maxHitPoints);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		Material[] materials = gameObject.GetComponentInChildren<SkinnedMeshRenderer>().materials;
-
-		// body color
-		materials[0].color = friendly ? Color.green : Color.red;
-		// head color
-		materials[1].color = Color.Lerp(Color.black, Color.white, currentHitPoints / (float)maxHitPoints);
-		
 		float t = Time.deltaTime;
 
 		if (currentHitPoints <= 0) {
@@ -97,7 +83,11 @@ public class MobController : MonoBehaviour {
 					Flock();
 					Move(t);
 				}
-			} 
+			} else {
+				//Flock();
+				//Move(t);
+				animation.Play("dance");
+			}
 		}
 	}
 	/*
@@ -204,19 +194,29 @@ public class MobController : MonoBehaviour {
 				// variable damage, minimum 1
 				float variance = Random.Range(1f - damageVariance, 1f + damageVariance);
 				int damage = Mathf.Max(1, Mathf.RoundToInt(attackPower * variance * (1f - enemy.armor)));
-				enemy.currentHitPoints -= damage;
-				//enemy.animation.Play("gethit");
-				GameObject damageDisplay = (GameObject)Instantiate (textPrefab, enemy.transform.position, Quaternion.identity);
-				damageDisplay.GetComponent<TextScript>().Init(damage.ToString(), Color.yellow);
-				//damageDisplay.transform.position += damageDisplay.transform.up * 2f;
+				enemy.TakeDamage(damage);
 			} else {
 				// miss
 				GameObject damageDisplay = (GameObject)Instantiate (textPrefab, enemy.transform.position, Quaternion.identity);
-				damageDisplay.GetComponent<TextScript>().Init("miss", Color.white);
-				//damageDisplay.transform.position += damageDisplay.transform.up * 2f;
+				damageDisplay.GetComponent<TextScript>().Init("Dodge!", Color.white);
 			}
 		}
 		attackTimer -= t;
+	}
+
+	public void TakeDamage(int amount) {
+		currentHitPoints -= amount;
+		GameObject damageDisplay = (GameObject)Instantiate (textPrefab, transform.position, Quaternion.identity);
+		damageDisplay.GetComponent<TextScript>().Init(amount.ToString(), Color.yellow);
+	}
+
+	public void HealDamage(int amount) {
+		amount = Mathf.Min(amount, maxHitPoints - currentHitPoints);
+		if (amount > 0) {
+			currentHitPoints += amount;
+			GameObject damageDisplay = (GameObject)Instantiate (textPrefab, transform.position, Quaternion.identity);
+			damageDisplay.GetComponent<TextScript>().Init(amount.ToString(), Color.blue);
+		}
 	}
 
 	private void Die() {
