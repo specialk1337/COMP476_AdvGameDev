@@ -1,46 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class ControlFlock : MonoBehaviour {
-
-	public float minVelocity = 1;
-	public float maxVelocity = 8;
+/// <summary>
+/// these define the flock's behavior
+/// </summary>
+public class ControlFlock : MonoBehaviour
+{
+	public float minVelocity = 5;
+	public float maxVelocity = 20;
 	public float randomness = 1;
 	public int flockSize = 10;
-
-	public GameObject leaderPrefab;
-	public GameObject lackey;
-
-	public Vector3 flockCenter;
-	public Vector3 flockVelocity;
-
-	private GameObject[] units;
-	// Use this for initialization
-	void Start () {
-		units = new GameObject [flockSize];
-
-		for (int i = 0; i < flockSize; i++) {
-			Vector3 position  = new Vector3 (Random.value * collider.bounds.size.x, Random.value * collider.bounds.size.y, Random.value * collider.bounds.size.z) - collider.bounds.extents;
-
-			GameObject unit = Instantiate (leaderPrefab, transform.position, transform.rotation) as GameObject;
-			unit.transform.parent = transform;
-			unit.transform.localPosition = position;
-			unit.GetComponent<FlockUnit>().SetController (gameObject);
-			units[i] = unit;
+	public FlockUnit prefab;
+	public Transform target;
+	
+	internal Vector3 flockCenter;
+	internal Vector3 flockVelocity;
+	
+	List<FlockUnit> boids = new List<FlockUnit>();
+	
+	void Start()
+	{
+		for (int i = 0; i < flockSize; i++)
+		{
+			FlockUnit boid = Instantiate(prefab, transform.position, transform.rotation) as FlockUnit;
+			boid.transform.parent = transform;
+			boid.transform.localPosition = new Vector3(
+				Random.value * collider.bounds.size.x,
+				Random.value * collider.bounds.size.y,
+				Random.value * collider.bounds.size.z) - collider.bounds.extents;
+			boid.controller = this;
+			boids.Add(boid);
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	void Update()
+	{
 		Vector3 center = Vector3.zero;
 		Vector3 velocity = Vector3.zero;
-
-		foreach (GameObject unit in units) {
-			center = center + unit.transform.localPosition;
-			velocity = velocity + unit.rigidbody.velocity;
+		foreach (FlockUnit boid in boids)
+		{
+			center += boid.transform.localPosition;
+			velocity += boid.rigidbody.velocity;
 		}
-
-		flockCenter = flockCenter / (flockSize);
-		flockVelocity = flockVelocity / (flockSize);
+		flockCenter = center / flockSize;
+		flockVelocity = velocity / flockSize;
 	}
 }
