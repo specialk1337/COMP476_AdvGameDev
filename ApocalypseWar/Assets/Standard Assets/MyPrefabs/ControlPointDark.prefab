@@ -276,6 +276,7 @@ MonoBehaviour:
   spawnDelay: 8
   anchorDelay: 10
   mobPrefab: {fileID: 100016, guid: a2cb09cf998faef4fb7887e15c3608c1, type: 2}
+  fireworksPrefab: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -285,6 +286,7 @@ MonoBehaviour:
   healAmount: 1
   healDelay: 1
   controlPointState: 1
+  prevControlState: 0
   connectedPoints:
   - {fileID: 0}
   - {fileID: 0}
