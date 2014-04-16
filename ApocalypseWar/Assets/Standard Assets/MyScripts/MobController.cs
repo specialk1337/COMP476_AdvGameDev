@@ -4,6 +4,7 @@ using System.Collections;
 public class MobController : MonoBehaviour {
 
 	public GameObject textPrefab;
+	public GameObject fireballPrefab;
 
 	public Vector3 target; // actual target, change this when changing target
 	private Vector3 targetPoint;/*Kevin*/ // modified by flocking, don't change this
@@ -43,9 +44,13 @@ public class MobController : MonoBehaviour {
 	public Vector3 alignment;
 	public Vector3 cohesion;
 
+	public Vector3 projectionVelocity;
+	public Vector3 projectionGravity;
+
 	// Use this for initialization
 	void Start () {
 		velocity = Vector3.zero;
+		projectionVelocity = Vector3.zero;
 		target = transform.position;
 	}
 
@@ -65,6 +70,8 @@ public class MobController : MonoBehaviour {
 	void Update () {
 
 		float t = Time.deltaTime;
+
+		UpdateProjection();
 
 		if (currentHitPoints <= 0) {
 			Die();
@@ -119,8 +126,9 @@ public class MobController : MonoBehaviour {
 		int friendlyCount = 0;
 
 		foreach (GameObject mob in mobs) {
-			if (!gameObject.Equals(mob.gameObject)) {
+			if (!gameObject.Equals(mob.gameObject) && mob.GetComponent<MobController>() != null) {
 				v = (transform.position - mob.transform.position);
+				v.y = 0f;
 				float mag = v.magnitude;
 				if (mag < flockDistance) {
 					// separation
@@ -189,25 +197,35 @@ public class MobController : MonoBehaviour {
 		if (attackTimer <= 0) {
 			animation.Play ("attack");
 			attackTimer += attackDelay;
-			// calculate chance to hit
-			if (Random.Range(0f, 1f) > enemy.dodgeChance) {
-				// variable damage, minimum 1
-				float variance = Random.Range(1f - damageVariance, 1f + damageVariance);
-				int damage = Mathf.Max(1, Mathf.RoundToInt(attackPower * variance * (1f - enemy.armor)));
-				enemy.TakeDamage(damage);
+			if (gameObject.name.Equals("skeletonMage(Clone)")) {
+				GameObject fireball = (GameObject)Instantiate (fireballPrefab, transform.position + (transform.forward + transform.up) / 2f, Quaternion.identity);
+				fireball.GetComponent<FireballScript>().Init(gameObject, enemy.transform.position, friendly);
 			} else {
-				// miss
-				GameObject damageDisplay = (GameObject)Instantiate (textPrefab, enemy.transform.position, Quaternion.identity);
-				damageDisplay.GetComponent<TextScript>().Init("Dodge!", Color.white);
+				if (Random.Range(0f, 1f) > enemy.dodgeChance) {
+					enemy.TakeDamage(CalcDamage(enemy.armor), false);
+				} else {
+					enemy.Dodge();
+				}
 			}
 		}
 		attackTimer -= t;
 	}
 
-	public void TakeDamage(int amount) {
+	public int CalcDamage(float enemyArmor) {
+		// variable damage, minimum 1
+		float variance = Random.Range(1f - damageVariance, 1f + damageVariance);
+		return Mathf.Max(1, Mathf.RoundToInt(attackPower * variance * (1f - enemyArmor)));
+	}
+
+	public void Dodge() {
+		GameObject damageDisplay = (GameObject)Instantiate (textPrefab, transform.position, Quaternion.identity);
+		damageDisplay.GetComponent<TextScript>().Init("Dodge!", Color.white);
+	}
+
+	public void TakeDamage(int amount, bool fire) {
 		currentHitPoints -= amount;
 		GameObject damageDisplay = (GameObject)Instantiate (textPrefab, transform.position, Quaternion.identity);
-		damageDisplay.GetComponent<TextScript>().Init(amount.ToString(), Color.yellow);
+		damageDisplay.GetComponent<TextScript>().Init(amount.ToString(), fire ? Color.Lerp(Color.red, Color.yellow, 0.5f) : Color.yellow);
 	}
 
 	public void HealDamage(int amount) {
@@ -226,6 +244,22 @@ public class MobController : MonoBehaviour {
 			deathTimer += Time.deltaTime;
 		} else {
 			Destroy (this.gameObject);
+		}
+	}
+
+	public void Project(Vector3 force) {
+		projectionVelocity = force;
+	}
+
+	private void UpdateProjection() {
+		if (projectionVelocity != Vector3.zero) {
+			projectionVelocity += projectionGravity * Time.deltaTime;
+			if (transform.position.y > 0) {
+				transform.position += projectionVelocity * Time.deltaTime;
+			} else {
+				transform.position.Scale(new Vector3(1f, 0f, 1f));
+				projectionVelocity = Vector3.zero;
+			}
 		}
 	}
 

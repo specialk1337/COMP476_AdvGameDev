@@ -119,6 +119,7 @@ MonoBehaviour:
   spawnDelay: 4
   anchorDelay: 10
   mobPrefab: {fileID: 100008, guid: d139727d46a14204285626a8b7ef9525, type: 2}
+  fireworksPrefab: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -128,6 +129,7 @@ MonoBehaviour:
   healAmount: 1
   healDelay: 1
   controlPointState: 0
+  prevControlState: 0
   connectedPoints:
   - {fileID: 753910596}
   - {fileID: 2025946171}
@@ -741,6 +743,7 @@ MonoBehaviour:
   spawnDelay: 10
   anchorDelay: 10
   mobPrefab: {fileID: 100024, guid: 1bc803c4bf46dcc48b0d9035951ec07a, type: 2}
+  fireworksPrefab: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -750,6 +753,7 @@ MonoBehaviour:
   healAmount: 1
   healDelay: 1
   controlPointState: 1
+  prevControlState: 0
   connectedPoints:
   - {fileID: 1968674970}
   - {fileID: 1562823434}
@@ -1507,6 +1511,7 @@ MonoBehaviour:
   spawnDelay: 6
   anchorDelay: 10
   mobPrefab: {fileID: 100010, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 2}
+  fireworksPrefab: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -1516,6 +1521,7 @@ MonoBehaviour:
   healAmount: 1
   healDelay: 1
   controlPointState: 1
+  prevControlState: 0
   connectedPoints:
   - {fileID: 1843307036}
   - {fileID: 2025946171}
@@ -2733,6 +2739,7 @@ MonoBehaviour:
   spawnDelay: 4
   anchorDelay: 10
   mobPrefab: {fileID: 100008, guid: d139727d46a14204285626a8b7ef9525, type: 2}
+  fireworksPrefab: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -2742,6 +2749,7 @@ MonoBehaviour:
   healAmount: 1
   healDelay: 1
   controlPointState: 1
+  prevControlState: 0
   connectedPoints:
   - {fileID: 1813063131}
   - {fileID: 1968674970}
@@ -2896,6 +2904,7 @@ MonoBehaviour:
   spawnDelay: 10
   anchorDelay: 10
   mobPrefab: {fileID: 100024, guid: 1bc803c4bf46dcc48b0d9035951ec07a, type: 2}
+  fireworksPrefab: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -2905,6 +2914,7 @@ MonoBehaviour:
   healAmount: 1
   healDelay: 1
   controlPointState: 1
+  prevControlState: 0
   connectedPoints:
   - {fileID: 1970476321}
   - {fileID: 1813063131}
@@ -3396,6 +3406,7 @@ MonoBehaviour:
   spawnDelay: 4
   anchorDelay: 10
   mobPrefab: {fileID: 100008, guid: d139727d46a14204285626a8b7ef9525, type: 2}
+  fireworksPrefab: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -3405,6 +3416,7 @@ MonoBehaviour:
   healAmount: 1
   healDelay: 1
   controlPointState: 2
+  prevControlState: 0
   connectedPoints:
   - {fileID: 1970476321}
   - {fileID: 1813063131}
@@ -3498,6 +3510,7 @@ MonoBehaviour:
   spawnDelay: 4
   anchorDelay: 10
   mobPrefab: {fileID: 100008, guid: d139727d46a14204285626a8b7ef9525, type: 2}
+  fireworksPrefab: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -3507,6 +3520,7 @@ MonoBehaviour:
   healAmount: 1
   healDelay: 1
   controlPointState: 1
+  prevControlState: 0
   connectedPoints:
   - {fileID: 1767558325}
   - {fileID: 1970476321}
@@ -3635,6 +3649,7 @@ MonoBehaviour:
   spawnDelay: 8
   anchorDelay: 10
   mobPrefab: {fileID: 100016, guid: a2cb09cf998faef4fb7887e15c3608c1, type: 2}
+  fireworksPrefab: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -3644,6 +3659,7 @@ MonoBehaviour:
   healAmount: 1
   healDelay: 1
   controlPointState: 1
+  prevControlState: 0
   connectedPoints:
   - {fileID: 1585791230}
   - {fileID: 1562823434}
@@ -4035,6 +4051,7 @@ MonoBehaviour:
   spawnDelay: 8
   anchorDelay: 10
   mobPrefab: {fileID: 100016, guid: a2cb09cf998faef4fb7887e15c3608c1, type: 2}
+  fireworksPrefab: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -4044,6 +4061,7 @@ MonoBehaviour:
   healAmount: 1
   healDelay: 1
   controlPointState: 1
+  prevControlState: 0
   connectedPoints:
   - {fileID: 1767558325}
   - {fileID: 1813063131}
@@ -4108,6 +4126,7 @@ MonoBehaviour:
   spawnDelay: 6
   anchorDelay: 10
   mobPrefab: {fileID: 100010, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 2}
+  fireworksPrefab: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -4117,6 +4136,7 @@ MonoBehaviour:
   healAmount: 1
   healDelay: 1
   controlPointState: 1
+  prevControlState: 0
   connectedPoints:
   - {fileID: 1767558325}
   - {fileID: 1813063131}
@@ -4282,6 +4302,7 @@ MonoBehaviour:
   spawnDelay: 4
   anchorDelay: 10
   mobPrefab: {fileID: 100008, guid: d139727d46a14204285626a8b7ef9525, type: 2}
+  fireworksPrefab: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
@@ -4291,6 +4312,7 @@ MonoBehaviour:
   healAmount: 1
   healDelay: 1
   controlPointState: 1
+  prevControlState: 0
   connectedPoints:
   - {fileID: 1562823434}
   - {fileID: 229536277}

@@ -10,6 +10,7 @@ public class ControlPoint : MonoBehaviour {
 	public float spawnDelay;
 	public float anchorDelay;
 	public GameObject mobPrefab;
+	public GameObject fireworksPrefab;
 	[SerializeField]private GameObject ArrowPreFab;
 	[SerializeField]private GameObject AnchorPreFab;
 	private GameObject ActiveTarget;
@@ -40,6 +41,7 @@ public class ControlPoint : MonoBehaviour {
 	private float healCounter;
 
 	public ownerControl controlPointState;
+	public ownerControl prevControlState;
 
 	[SerializeField]public List<GameObject> connectedPoints;
 	[SerializeField]private List<GameObject> arrows;
@@ -89,11 +91,7 @@ public class ControlPoint : MonoBehaviour {
 
 		buildConnections ();
 
-		healCounter += Time.deltaTime;
-		if (healCounter >= healDelay) {
-			healCounter -= healDelay;
-			healMobs(healAmount);
-		}
+		prevControlState = controlPointState;
 	}
 	public bool isNeutral()
 	{
@@ -137,10 +135,12 @@ public class ControlPoint : MonoBehaviour {
 		GameObject[] mobs = GameObject.FindGameObjectsWithTag ("Mob");
 		float distance;
 		foreach (GameObject m in mobs) {
-			distance = (m.transform.position - gameObject.transform.position).magnitude;
-			if (distance < controlDistance) {
-				float force = (controlDistance - distance) / controlDistance;
-				controlCounter += force * captureSpeed * t * (m.GetComponent<MobController>().friendly ? 1f : -1f);
+			if (m.GetComponent<MobController>() != null) {
+				distance = (m.transform.position - gameObject.transform.position).magnitude;
+				if (distance < controlDistance) {
+					float force = (controlDistance - distance) / controlDistance;
+					controlCounter += force * captureSpeed * t * (m.GetComponent<MobController>().friendly ? 1f : -1f);
+				}
 			}
 		}
 		controlCounter = Mathf.Clamp (controlCounter, -1f, 1f);
@@ -153,6 +153,11 @@ public class ControlPoint : MonoBehaviour {
 		} else {
 			controlPointState = ownerControl.InConflict;
 		}
+
+		if ((controlPointState == ownerControl.Friendly || controlPointState == ownerControl.Enemy) && controlPointState != prevControlState) {
+			prevControlState = controlPointState;
+			GameObject fireworks = (GameObject)Instantiate (fireworksPrefab, transform.position + transform.up * 2f, Quaternion.identity);
+        }
 	}
 
 	private void SetColor(Color c) {
@@ -214,6 +219,12 @@ public class ControlPoint : MonoBehaviour {
 		{
 			setArrowsToTargets();
 		}
+		
+		healCounter += Time.deltaTime;
+		if (healCounter >= healDelay) {
+			healCounter -= healDelay;
+            healMobs(healAmount);
+        }
 
 	}
 

@@ -1465,6 +1465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textPrefab: {fileID: 100000, guid: 437d9e14c9fc6574fa11af045fa33754, type: 2}
+  fireballPrefab: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   flee: 0
   maxVelocity: 3
@@ -1478,7 +1479,7 @@ MonoBehaviour:
   currentHitPoints: 30
   attackPower: 10
   damageVariance: .200000003
-  attackDelay: 3
+  attackDelay: 2
   attackRange: 2
   aggroRange: 8
   dodgeChance: .100000001
@@ -1493,6 +1494,8 @@ MonoBehaviour:
   separation: {x: 0, y: 0, z: 0}
   alignment: {x: 0, y: 0, z: 0}
   cohesion: {x: 0, y: 0, z: 0}
+  projectionVelocity: {x: 0, y: 0, z: 0}
+  projectionGravity: {x: 0, y: -10, z: 0}
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
