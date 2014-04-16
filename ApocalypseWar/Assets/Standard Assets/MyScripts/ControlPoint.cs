@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ControlPoint : MonoBehaviour {
 
-	private enum ownerControl{Friendly, Neutral, Enemy, InConflict};
+	public enum ownerControl{Friendly, Neutral, Enemy, InConflict};
 	private static bool oneSelected = false;
 	private static bool DefendPoint = true; //set True when no forward point and troops should defend this node
 	public float spawnDelay;
@@ -32,14 +32,16 @@ public class ControlPoint : MonoBehaviour {
 	public float captureSpeed;
 	public float colorFlashSpeed;
 	private float colorFlashCounter;
+	private GameObject PrimaryTarget = null;
+	private List<GameObject> SecondaryTargets = new List<GameObject> ();
 
 	public int healAmount;
 	public float healDelay;
 	private float healCounter;
 
-	[SerializeField]ownerControl controlPointState;
+	public ownerControl controlPointState;
 
-	[SerializeField]private List<GameObject> connectedPoints;
+	[SerializeField]public List<GameObject> connectedPoints;
 	[SerializeField]private List<GameObject> arrows;
 	private List<GameObject> activeTroops;
 
@@ -92,6 +94,18 @@ public class ControlPoint : MonoBehaviour {
 			healCounter -= healDelay;
 			healMobs(healAmount);
 		}
+	}
+	public bool isNeutral()
+	{
+		return controlPointState == ownerControl.Neutral;
+	}
+	public bool isNPC()
+	{
+		return controlPointState == ownerControl.Enemy;
+	}
+	public bool isPlayer()
+	{
+		return controlPointState == ownerControl.Friendly;
 	}
 
 	public List<GameObject> getArrows()
@@ -195,6 +209,58 @@ public class ControlPoint : MonoBehaviour {
 			lastSpawn = 0f;
 			break;
 		}
+
+		if(controlPointState == ownerControl.Enemy)
+		{
+			setArrowsToTargets();
+		}
+
+	}
+
+	private void setArrowsToTargets()
+	{
+		bool directlink = false;
+		/*If CP is directly connected to a ST then capture it*/
+		if(SecondaryTargets.Count > 0)
+		{
+			foreach(GameObject cp in SecondaryTargets)
+			{
+				foreach(GameObject connection in connectedPoints)
+				{
+					if(connection.Equals(cp))
+					{
+						ActiveTarget = connection;
+						directlink = true;
+						foreach(GameObject arrow in arrows)
+						{
+							arrow.SetActive(false);
+							if(arrow.GetComponent<ArrowScript>().getPointingAt().Equals(connection))
+								arrow.SetActive(true);
+						}
+					}
+				}
+			}
+		}
+		if(PrimaryTarget!=null && !directlink)
+		{
+			float myDist = Vector3.Distance(PrimaryTarget.transform.position, transform.position);
+
+			foreach(GameObject myConnection in connectedPoints)
+			{
+				float connectedDist = Vector3.Distance(PrimaryTarget.transform.position, myConnection.transform.position);
+				if(connectedDist < myDist)
+				{
+					ActiveTarget = myConnection;
+					directlink = true;
+					foreach(GameObject arrow in arrows)
+					{
+						arrow.SetActive(false);
+						if(arrow.GetComponent<ArrowScript>().getPointingAt().Equals(myConnection))
+							arrow.SetActive(true);
+					}
+				}
+			}
+		}
 	}
 
 	public void healMobs(int amount) {
@@ -260,7 +326,7 @@ public class ControlPoint : MonoBehaviour {
 						}
 					}
 				}
-				GameObject anchor = (GameObject)Instantiate (AnchorPreFab, new Vector3(transform.position.x, 0f, transform.position.z), Quaternion.identity);
+				GameObject anchor = (GameObject)Instantiate (AnchorPreFab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
 				anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.transform.position, activeTroops);
 				lastAnchor = 0;
 			}
@@ -269,6 +335,13 @@ public class ControlPoint : MonoBehaviour {
 			lastAnchor += Time.deltaTime;
 		}
 	}
+
+	public void setTargets(GameObject _PrimaryTarget, List<GameObject> _SecondaryTargets)
+	{
+		PrimaryTarget = _PrimaryTarget;
+		SecondaryTargets = _SecondaryTargets;
+	}
+
 	void checkSelected()
 	{
 		RaycastHit hit = new RaycastHit();
@@ -277,7 +350,7 @@ public class ControlPoint : MonoBehaviour {
 
 		if (Physics.Raycast(ray, out hit))
 		{
-			if(hit.transform.gameObject.Equals(this.gameObject))
+			if(hit.transform.gameObject.Equals(this.gameObject) && controlPointState == ownerControl.Friendly)
 			{
 				if(_isSelected)
 				{
