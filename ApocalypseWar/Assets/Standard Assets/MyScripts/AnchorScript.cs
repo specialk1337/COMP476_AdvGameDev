@@ -42,19 +42,20 @@ public class AnchorScript : MonoBehaviour {
 	private void formations()
 	{
 		/* Basic formation 4xN*/
-
-		int numTroops = _formationObjects.Count;
-
-		for(int n = 0; n < numTroops/4; ++n)
-		{
-			int objNum = 0;
-			for(int m = -2; m != 2; ++m)
+		if (_formationObjects != null) {
+			int numTroops = _formationObjects.Count;
+			
+			for(int n = 0; n < numTroops/4; ++n)
 			{
-				if(_formationObjects[objNum+(n*4)]!=null)
+				int objNum = 0;
+				for(int m = -2; m != 2; ++m)
 				{
-					_formationObjects[objNum+(n*4)].GetComponent<MobController> ().target = transform.position + new Vector3(m, 0, n);
+					if(_formationObjects[objNum+(n*4)]!=null)
+					{
+						_formationObjects[objNum+(n*4)].GetComponent<MobController> ().target = transform.position + new Vector3(m, 0, n);
+					}
+					objNum++;
 				}
-				objNum++;
 			}
 		}
 

@@ -247,16 +247,18 @@ public class ControlPoint : MonoBehaviour {
 
 			foreach(GameObject myConnection in connectedPoints)
 			{
-				float connectedDist = Vector3.Distance(PrimaryTarget.transform.position, myConnection.transform.position);
-				if(connectedDist < myDist)
-				{
-					ActiveTarget = myConnection;
-					directlink = true;
-					foreach(GameObject arrow in arrows)
+				if (myConnection != null) {
+					float connectedDist = Vector3.Distance(PrimaryTarget.transform.position, myConnection.transform.position);
+					if(connectedDist < myDist)
 					{
-						arrow.SetActive(false);
-						if(arrow.GetComponent<ArrowScript>().getPointingAt().Equals(myConnection))
-							arrow.SetActive(true);
+						ActiveTarget = myConnection;
+						directlink = true;
+						foreach(GameObject arrow in arrows)
+						{
+							arrow.SetActive(false);
+							if(arrow.GetComponent<ArrowScript>().getPointingAt().Equals(myConnection))
+								arrow.SetActive(true);
+						}
 					}
 				}
 			}
@@ -278,9 +280,6 @@ public class ControlPoint : MonoBehaviour {
 					}
 				}
 			}
-			GameObject anchor = (GameObject)Instantiate (AnchorPreFab, new Vector3(transform.position.x, 0f, transform.position.z), Quaternion.identity);
-			anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.transform.position, activeTroops);
-			lastAnchor = 0;
 		}
 	}
 
@@ -326,9 +325,12 @@ public class ControlPoint : MonoBehaviour {
 						}
 					}
 				}
-				GameObject anchor = (GameObject)Instantiate (AnchorPreFab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
-				anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.transform.position, activeTroops);
-				lastAnchor = 0;
+				if (activeTroops != null && ActiveTarget != null) {
+					GameObject anchor = (GameObject)Instantiate (AnchorPreFab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
+					anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.transform.position, activeTroops);
+					lastAnchor = 0;
+				}
+
 			}
 			
 		} else {

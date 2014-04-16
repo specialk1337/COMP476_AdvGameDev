@@ -2140,8 +2140,8 @@ MonoBehaviour:
   idleDelay: .25
   deathDelay: 2.32999992
   separationWeight: 1
-  alignmentWeight: .100000001
-  cohesionWeight: .100000001
+  alignmentWeight: 0
+  cohesionWeight: 0
   flockDistance: 3
   closestEnemy: {fileID: 0}
   separation: {x: 0, y: 0, z: 0}
