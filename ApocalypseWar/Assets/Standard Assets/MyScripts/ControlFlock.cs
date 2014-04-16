@@ -7,43 +7,40 @@ using System.Collections.Generic;
 /// </summary>
 public class ControlFlock : MonoBehaviour
 {
-	public float minVelocity = 5;
-	public float maxVelocity = 20;
-	public float randomness = 1;
-	public int flockSize = 10;
-	public FlockUnit prefab;
-	public Transform target;
+		public int spiderCount = 50;
+		public float spawnRadius = 100f;
+		public List<GameObject> spiders;
 	
-	internal Vector3 flockCenter;
-	internal Vector3 flockVelocity;
+		public Vector2 swarmBounds = new Vector2 (300f, 300f);
 	
-	List<FlockUnit> boids = new List<FlockUnit>();
+		public GameObject prefab;
 	
-	void Start()
-	{
-		for (int i = 0; i < flockSize; i++)
+		// Use this for initialization
+		protected virtual void Start ()
 		{
-			FlockUnit boid = Instantiate(prefab, transform.position, transform.rotation) as FlockUnit;
-			boid.transform.parent = transform;
-			boid.transform.localPosition = new Vector3(
-				Random.value * collider.bounds.size.x,
-				Random.value * collider.bounds.size.y,
-				Random.value * collider.bounds.size.z) - collider.bounds.extents;
-			boid.controller = this;
-			boids.Add(boid);
-		}
-	}
 	
-	void Update()
-	{
-		Vector3 center = Vector3.zero;
-		Vector3 velocity = Vector3.zero;
-		foreach (FlockUnit boid in boids)
-		{
-			center += boid.transform.localPosition;
-			velocity += boid.rigidbody.velocity;
+		
+				// instantiate the spiders
+				GameObject spiderTmp;
+				spiders = new List<GameObject> ();
+				for (int i = 0; i < spiderCount; i++) {
+						spiderTmp = (GameObject)GameObject.Instantiate (prefab);
+						FlockUnit db = spiderTmp.GetComponent<FlockUnit> ();
+						db.spiders = this.spiders;
+						db.swarm = this;
+			
+						// spawn inside circle
+						Vector2 pos = new Vector2 (transform.position.x, transform.position.z) + Random.insideUnitCircle * spawnRadius;
+						spiderTmp.transform.position = new Vector3 (pos.x, transform.position.y, pos.y);
+						spiderTmp.transform.parent = transform;
+			
+						spiders.Add (spiderTmp);
+				}
 		}
-		flockCenter = center / flockSize;
-		flockVelocity = velocity / flockSize;
-	}
+	
+		// Update is called once per frame
+		protected virtual void Update ()
+		{
+		
+		}
 }
