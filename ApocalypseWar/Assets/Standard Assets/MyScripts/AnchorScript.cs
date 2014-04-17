@@ -19,11 +19,11 @@ public class AnchorScript : MonoBehaviour {
 
 	}
 
-	public void initilize(Vector3 Destination, List<GameObject> formationObjects)
+	public void initilize(DDNode target, DDNode start, List<GameObject> formationObjects)
 	{
-		_destination = Destination;
+		_destination = target.transform.position;
 		_formationObjects = new List<GameObject> (formationObjects);
-		_pathToDestination.Add (Destination);
+		_pathToDestination = GetPath(start, target);
 
 	}
 	
@@ -37,8 +37,19 @@ public class AnchorScript : MonoBehaviour {
 
 	private void move()
 	{
-		/* later logic for path finding could go here*/
-		arrive (_destination);
+		if (_pathToDestination.Count == 0){
+			arrive (_destination);
+		}
+		else {
+			Vector3 dis = transform.position - _pathToDestination[0];
+			if(dis.magnitude < 3)
+			{
+				_pathToDestination.RemoveAt(0);
+			}
+			if (_pathToDestination.Count > 0){
+				arrive (_pathToDestination[0]);
+			}
+		}
 	}
 	private void formations()
 	{
@@ -101,5 +112,77 @@ public class AnchorScript : MonoBehaviour {
 		//transform.position = position + velocity * t;
 		
 		transform.position += new Vector3(velocity.x*Time.deltaTime, 0, velocity.z*Time.deltaTime);
+	}
+
+	List<Vector3> GetPath (DDNode start, DDNode dest)
+	{
+		
+		List<SearchNode> openList = new List<SearchNode> ();
+		List<SearchNode> closedList = new List<SearchNode> ();
+		
+		openList.Add (new SearchNode(start, null));
+		
+		SearchNode currentNode = openList[0];
+		SearchNode closedToRemove = null;
+		bool toVisit;
+		
+		while (dest != currentNode.node) {
+			openList.Sort (delegate(SearchNode c1, SearchNode c2) {
+				return Vector3.Distance (dest.transform.position, c1.node.transform.position).CompareTo (Vector3.Distance (dest.transform.position, c2.node.transform.position));
+			});
+			
+			currentNode = openList [0];
+			openList.RemoveAt (0);
+			closedList.Add (currentNode);
+			
+			if (currentNode.node != dest) {
+				foreach (DDNode neighbour in currentNode.node.neighbours) {
+					toVisit = true;
+					closedToRemove = null;
+					foreach (SearchNode closedNode in closedList) {
+						if (closedNode.node == neighbour) {
+							if (currentNode.cost + Vector3.Distance (closedNode.node.transform.position, currentNode.node.transform.position) < closedNode.cost) {
+								closedToRemove = closedNode;
+							} else {
+								toVisit = false;
+							}
+							break;
+						}
+					}
+					
+					if (closedToRemove != null) {
+						closedList.Remove (closedToRemove);
+					}
+					
+					if (toVisit) {
+						openList.Add (new SearchNode(neighbour, currentNode));
+					}
+				}
+			}
+		}
+		
+		List<Vector3> path = new List<Vector3> ();
+		while (currentNode.parent != null) {
+			path.Add (currentNode.node.transform.position);
+			currentNode = currentNode.parent;
+		}
+		path.Reverse ();
+		
+		return path;
+	}
+
+	private class SearchNode {
+		public float cost;
+		public DDNode node;
+		public SearchNode parent;
+
+		public SearchNode(DDNode node, SearchNode parent) {
+			this.node = node;
+			this.parent = parent;
+			if (parent != null)
+				this.cost = parent.cost + Vector3.Distance (node.transform.position, parent.node.transform.position);
+			else
+				this.cost = 0;
+		}
 	}
 }

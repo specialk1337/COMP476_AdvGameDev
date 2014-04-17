@@ -40,6 +40,8 @@ public class ControlPoint : MonoBehaviour {
 	public float healDelay;
 	private float healCounter;
 
+	public DDNode Node;
+
 	public ownerControl controlPointState;
 	public ownerControl prevControlState;
 
@@ -338,7 +340,7 @@ public class ControlPoint : MonoBehaviour {
 				}
 				if (activeTroops != null && ActiveTarget != null) {
 					GameObject anchor = (GameObject)Instantiate (AnchorPreFab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
-					anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.transform.position, activeTroops);
+					anchor.GetComponent<AnchorScript> ().initilize(ActiveTarget.GetComponent<ControlPoint> ().Node, this.Node, activeTroops);
 					lastAnchor = 0;
 				}
 
