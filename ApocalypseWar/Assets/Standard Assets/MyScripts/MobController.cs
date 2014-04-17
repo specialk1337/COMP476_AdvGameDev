@@ -33,7 +33,8 @@ public class MobController : MonoBehaviour {
 	private float idleTimer;
 	public float deathDelay;
 	private float deathTimer;
-	
+
+	public float separationDistance;
 	public float separationWeight;
 	public float alignmentWeight;
 	public float cohesionWeight;
@@ -131,9 +132,11 @@ public class MobController : MonoBehaviour {
 				v.y = 0f;
 				float mag = v.magnitude;
 				if (mag < flockDistance) {
-					// separation
-					v = v.normalized * (1 / (mag + 0.01f));
-					separation += v;
+					if (mag < separationDistance) {
+						// separation
+						v = v.normalized * separationDistance / mag;
+						separation += v;
+					}
 					
 					// friendly mobs only
 					if (friendly == mob.GetComponent<MobController>().friendly) {
@@ -300,7 +303,7 @@ public class MobController : MonoBehaviour {
 		if(direction.magnitude > satisfactionRadius) {
 			velocity = maxVelocity * direction.normalized;
 		}
-		else if(direction.magnitude <= 0.25f) {
+		else if(direction.magnitude <= 2f) {
 			velocity = Vector3.zero;
 		} else {
 			velocity = Mathf.Max(maxVelocity, direction.magnitude) * direction.normalized;

@@ -82,9 +82,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1448b332850cd438ea055fbe548575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 1
-  maxAcceleration: 2.5
-  maxSpeed: 2.5
+  distance: 50
+  maxAcceleration: 20
+  maxSpeed: 30
+  separationDistance: 5
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

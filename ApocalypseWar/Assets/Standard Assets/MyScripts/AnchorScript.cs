@@ -12,6 +12,7 @@ public class AnchorScript : MonoBehaviour {
 	public float maxSpeed;
 	//public float t2t;
 	private Vector3 velocity;
+	public float separationDistance;
 
 	// Use this for initialization
 	void Start () {
@@ -45,14 +46,15 @@ public class AnchorScript : MonoBehaviour {
 		if (_formationObjects != null) {
 			int numTroops = _formationObjects.Count;
 			
-			for(int n = 0; n < numTroops/4; ++n)
+			for(int n = 0; n < numTroops/5; ++n)
 			{
 				int objNum = 0;
-				for(int m = -2; m != 2; ++m)
+				for(int m = -2; m <= 2; ++m)
 				{
-					if(_formationObjects[objNum+(n*4)]!=null)
+					if(_formationObjects[objNum+(n*5)]!=null)
 					{
-						_formationObjects[objNum+(n*4)].GetComponent<MobController> ().target = transform.position + new Vector3(m, 0, n);
+						_formationObjects[objNum+(n*5)].GetComponent<MobController> ().target = transform.position + 
+							new Vector3(m * separationDistance, 0, n * separationDistance);
 					}
 					objNum++;
 				}
@@ -79,7 +81,7 @@ public class AnchorScript : MonoBehaviour {
 	private void killMe()
 	{
 		Vector3 dis = transform.position - _destination;
-		if(dis.magnitude < 1.5)
+		if(dis.magnitude < 3)
 		{
 			Destroy(gameObject);
 		}

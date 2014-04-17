@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		mouselook = false;
-		zoomSpeed = 500f;
+		zoomSpeed = 1000f;
 	}
 	
 	// Update is called once per frame
@@ -24,8 +24,8 @@ public class CameraController : MonoBehaviour {
 
 		if (mouselook) {
 			Vector3 newCameraPos = transform.position;
-			newCameraPos.x -= (Input.mousePosition.x - prevMousePos.x) / 10;
-			newCameraPos.z -= (Input.mousePosition.y - prevMousePos.y) / 10;
+			newCameraPos.x -= (Input.mousePosition.x - prevMousePos.x) / 5;
+			newCameraPos.z -= (Input.mousePosition.y - prevMousePos.y) / 5;
 			transform.position = newCameraPos;
 			prevMousePos = Input.mousePosition;
 		}

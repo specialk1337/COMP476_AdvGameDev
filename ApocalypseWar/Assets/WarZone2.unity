@@ -187,7 +187,7 @@ Transform:
   m_PrefabInternal: {fileID: 90551773}
   m_GameObject: {fileID: 47494715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 512522603}
@@ -289,13 +289,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 2077058091}
   - {fileID: 1907849083}
@@ -432,7 +432,7 @@ Transform:
   m_PrefabInternal: {fileID: 119274916}
   m_GameObject: {fileID: 120138079}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 796593028}
@@ -899,7 +899,7 @@ Transform:
   m_PrefabInternal: {fileID: 1330760682}
   m_GameObject: {fileID: 457114640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1907849084}
@@ -1026,6 +1026,7 @@ GameObject:
   - 124: {fileID: 508427054}
   - 81: {fileID: 508427053}
   - 114: {fileID: 508427052}
+  - 114: {fileID: 508427058}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1106,6 +1107,20 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &508427058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 508427051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecb84247fa73ee040b15908475994c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Aggressive: 0
+  Deffensive: 0
+  radius: 20
 --- !u!1 &512522602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,13 +1183,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 2077058091}
   - {fileID: 1139095077}
@@ -1305,7 +1320,7 @@ Transform:
   m_PrefabInternal: {fileID: 130880256}
   m_GameObject: {fileID: 666912161}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1139095078}
@@ -1619,13 +1634,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 857826433}
   - {fileID: 74949584}
@@ -1807,7 +1822,7 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
@@ -1895,7 +1910,7 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
@@ -2016,7 +2031,7 @@ Transform:
   m_PrefabInternal: {fileID: 1600333952}
   m_GameObject: {fileID: 895537161}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077058092}
@@ -2079,7 +2094,7 @@ Transform:
   m_PrefabInternal: {fileID: 799127269}
   m_GameObject: {fileID: 898647074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.54023886, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 804267296}
@@ -2255,13 +2270,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 512522602}
   - {fileID: 804267295}
@@ -2641,7 +2656,7 @@ Transform:
   m_PrefabInternal: {fileID: 1143617577}
   m_GameObject: {fileID: 1312549615}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 74949585}
@@ -2727,6 +2742,10 @@ Prefab:
     - target: {fileID: 100004, guid: 5c7ed701dd1d7f6479f8b099d0ceef52, type: 2}
       propertyPath: m_Name
       value: ControlPointSpearSE
+      objectReference: {fileID: 0}
+    - target: {fileID: 10800000, guid: 5c7ed701dd1d7f6479f8b099d0ceef52, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c7ed701dd1d7f6479f8b099d0ceef52, type: 2}
@@ -3363,13 +3382,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 804267295}
   - {fileID: 74949584}
@@ -3436,13 +3455,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 857826433}
   - {fileID: 512522602}
@@ -3470,7 +3489,7 @@ Transform:
   m_PrefabInternal: {fileID: 1318762780}
   m_GameObject: {fileID: 1971845025}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1954399120}
@@ -3533,7 +3552,7 @@ Transform:
   m_PrefabInternal: {fileID: 1793057634}
   m_GameObject: {fileID: 1995583266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.54023886, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 857826436}
@@ -3635,13 +3654,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 512522602}
   - {fileID: 74949584}

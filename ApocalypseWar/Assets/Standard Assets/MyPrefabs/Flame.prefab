@@ -518,10 +518,10 @@ MonoBehaviour:
   textPrefab: {fileID: 100000, guid: 437d9e14c9fc6574fa11af045fa33754, type: 2}
   target: {x: 0, y: 0, z: 0}
   friendly: 0
-  radius: 1.5
-  triggerDistance: .5
-  projectionPower: 10
-  maxSpeed: 8
+  radius: 5
+  triggerDistance: 2.5
+  projectionPower: 25
+  maxSpeed: 50
   deathDelay: 3
 --- !u!1001 &100100000
 Prefab:

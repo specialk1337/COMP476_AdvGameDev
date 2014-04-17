@@ -21,6 +21,7 @@ public class NPCLogic : MonoBehaviour {
 	private int PlayerTotalKnownTroopsCount;
 	private int PlayerLargestArmyCount;
 	private GameObject PlayerLargetArmyLocation;
+	public float radius;
 
 	static private GameObject priorityTarget;
 	// Use this for initialization
@@ -64,7 +65,7 @@ public class NPCLogic : MonoBehaviour {
 			if(CP.GetComponent<ControlPoint>().isNPC())
 			{
 				MyCPs.Add (CP);
-				Collider[] hitColliders = Physics.OverlapSphere(CP.transform.position, 4.5F);
+				Collider[] hitColliders = Physics.OverlapSphere(CP.transform.position, radius);
 
 				foreach(Collider inRangeUnit in hitColliders)
 				{
@@ -110,7 +111,7 @@ public class NPCLogic : MonoBehaviour {
 						if(destination.GetComponent<ControlPoint>().isPlayer())
 						{
 							PlayerCPs.Add(destination);
-							Collider[] hitColliders = Physics.OverlapSphere(destination.transform.position, 4.5F);
+							Collider[] hitColliders = Physics.OverlapSphere(destination.transform.position, radius);
 
 							int playerTroops = 0;
 							foreach(Collider inRangeUnit in hitColliders)
@@ -195,7 +196,7 @@ public class NPCLogic : MonoBehaviour {
 							PrimaryTarget = CP;
 							Deffensive = true;
 
-							Collider[] hitColliders = Physics.OverlapSphere(CP.transform.position, 4.5F);
+							Collider[] hitColliders = Physics.OverlapSphere(CP.transform.position, radius);
 							
 							int NPCTroopsInDef = 0;
 							foreach(Collider inRangeUnit in hitColliders)
