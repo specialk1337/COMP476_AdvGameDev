@@ -99,7 +99,7 @@ Transform:
   m_GameObject: {fileID: 7698249}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.41624546, y: 0, z: -27.8121719}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 212599254}
   - {fileID: 1485085311}
@@ -123,19 +123,16 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 0
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 753910596}
   - {fileID: 2025946171}
-  - {fileID: 1843307036}
-  - {fileID: 0}
-  - {fileID: 0}
   arrows: []
 --- !u!135 &7698252
 SphereCollider:
@@ -247,7 +244,7 @@ Transform:
   m_PrefabInternal: {fileID: 241324518}
   m_GameObject: {fileID: 88085161}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1968674971}
@@ -263,7 +260,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_Intensity: 5
-  m_Range: 8
+  m_Range: 15
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -458,7 +455,7 @@ Transform:
   m_PrefabInternal: {fileID: 1528630509}
   m_GameObject: {fileID: 156771995}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 229536278}
@@ -474,7 +471,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_Intensity: 5
-  m_Range: 8
+  m_Range: 15
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -595,7 +592,7 @@ Transform:
   m_PrefabInternal: {fileID: 1034636963}
   m_GameObject: {fileID: 212599253}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7698250}
@@ -611,7 +608,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_Intensity: 5
-  m_Range: 8
+  m_Range: 15
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -658,7 +655,7 @@ Transform:
   m_PrefabInternal: {fileID: 1576890656}
   m_GameObject: {fileID: 226439570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 753910597}
@@ -674,7 +671,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_Intensity: 5
-  m_Range: 8
+  m_Range: 15
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -723,7 +720,7 @@ Transform:
   m_GameObject: {fileID: 229536277}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 19.8316288, y: 0, z: -3.25666332}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 156771996}
   - {fileID: 107718035}
@@ -747,17 +744,16 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 1968674970}
   - {fileID: 1562823434}
-  - {fileID: 2025946171}
   arrows: []
 --- !u!135 &229536280
 SphereCollider:
@@ -1097,7 +1093,7 @@ Transform:
   m_PrefabInternal: {fileID: 1907903560}
   m_GameObject: {fileID: 496738565}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1767558326}
@@ -1113,7 +1109,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_Intensity: 5
-  m_Range: 8
+  m_Range: 15
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -1392,6 +1388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Aggressive: 0
   Deffensive: 0
+  radius: 0
 --- !u!1 &692013354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,7 +1488,7 @@ Transform:
   m_GameObject: {fileID: 753910596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19.7307453, y: 0, z: -22.0425568}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 226439571}
   - {fileID: 432754065}
@@ -1515,17 +1512,16 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 1843307036}
   - {fileID: 2025946171}
-  - {fileID: 7698249}
   arrows: []
 --- !u!135 &753910599
 SphereCollider:
@@ -1777,7 +1773,7 @@ Transform:
   m_PrefabInternal: {fileID: 1404420758}
   m_GameObject: {fileID: 939826299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2025946172}
@@ -1793,7 +1789,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_Intensity: 5
-  m_Range: 8
+  m_Range: 15
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -2260,8 +2256,8 @@ MeshFilter:
 --- !u!1 &1226583243
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 100000, guid: 00a004706e4d1524396984d544915da1, type: 2}
+  m_PrefabInternal: {fileID: 1302350529}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1226583244}
@@ -2276,8 +2272,8 @@ GameObject:
 --- !u!4 &1226583244
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 400000, guid: 00a004706e4d1524396984d544915da1, type: 2}
+  m_PrefabInternal: {fileID: 1302350529}
   m_GameObject: {fileID: 1226583243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.6776047, y: 0, z: -5.62890625}
@@ -2287,8 +2283,9 @@ Transform:
 --- !u!114 &1226583245
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11400000, guid: 00a004706e4d1524396984d544915da1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1302350529}
   m_GameObject: {fileID: 1226583243}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -2300,6 +2297,46 @@ MonoBehaviour:
   spiders: []
   swarmBounds: {x: 100, y: 100}
   prefab: {fileID: 100002, guid: 4b9c623511d753c4d8d0e45b0189ae2e, type: 2}
+--- !u!1001 &1302350529
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 00a004706e4d1524396984d544915da1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -13.6776047
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00a004706e4d1524396984d544915da1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00a004706e4d1524396984d544915da1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -5.62890625
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00a004706e4d1524396984d544915da1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00a004706e4d1524396984d544915da1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00a004706e4d1524396984d544915da1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00a004706e4d1524396984d544915da1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 00a004706e4d1524396984d544915da1, type: 2}
+  m_RootGameObject: {fileID: 1226583243}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1328040858
 GameObject:
   m_ObjectHideFlags: 0
@@ -2397,7 +2434,7 @@ Transform:
   m_PrefabInternal: {fileID: 1736250359}
   m_GameObject: {fileID: 1356804015}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1813063132}
@@ -2413,7 +2450,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_Intensity: 5
-  m_Range: 8
+  m_Range: 15
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -2762,7 +2799,7 @@ Transform:
   m_GameObject: {fileID: 1562823434}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.0278789997, y: 0, z: .456899166}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 2126909113}
   - {fileID: 1169816123}
@@ -2786,13 +2823,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 1813063131}
   - {fileID: 1968674970}
@@ -2927,7 +2964,7 @@ Transform:
   m_GameObject: {fileID: 1585791230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19.2176552, y: 0, z: 9.39750576}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 1935696997}
   - {fileID: 2004296568}
@@ -2951,13 +2988,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 1970476321}
   - {fileID: 1813063131}
@@ -3148,7 +3185,7 @@ Transform:
   m_PrefabInternal: {fileID: 1918499493}
   m_GameObject: {fileID: 1639004993}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1970476322}
@@ -3164,7 +3201,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_Intensity: 5
-  m_Range: 8
+  m_Range: 15
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -3429,7 +3466,7 @@ Transform:
   m_GameObject: {fileID: 1767558325}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.57682467, y: 0, z: 30.3267975}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 496738566}
   - {fileID: 1773710690}
@@ -3453,19 +3490,16 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 2
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 1970476321}
   - {fileID: 1813063131}
-  - {fileID: 1968674970}
-  - {fileID: 0}
-  - {fileID: 0}
   arrows: []
 --- !u!135 &1767558328
 SphereCollider:
@@ -3533,7 +3567,7 @@ Transform:
   m_GameObject: {fileID: 1813063131}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.85823083, y: 0, z: 15.1242609}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 1356804016}
   - {fileID: 117756075}
@@ -3557,13 +3591,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 1767558325}
   - {fileID: 1970476321}
@@ -3607,7 +3641,7 @@ Transform:
   m_PrefabInternal: {fileID: 869468651}
   m_GameObject: {fileID: 1842089114}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1843307037}
@@ -3623,7 +3657,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_Intensity: 5
-  m_Range: 8
+  m_Range: 15
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -3672,7 +3706,7 @@ Transform:
   m_GameObject: {fileID: 1843307036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.9468069, y: 0, z: -8.76160908}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 1842089115}
   - {fileID: 1577785064}
@@ -3696,13 +3730,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 1585791230}
   - {fileID: 1562823434}
@@ -4009,7 +4043,7 @@ Transform:
   m_PrefabInternal: {fileID: 93391880}
   m_GameObject: {fileID: 1935696996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1585791231}
@@ -4025,7 +4059,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_Intensity: 5
-  m_Range: 8
+  m_Range: 15
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -4074,7 +4108,7 @@ Transform:
   m_GameObject: {fileID: 1968674970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 17.5612774, y: 0, z: 15.783535}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 88085162}
   - {fileID: 1141410610}
@@ -4098,13 +4132,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 1767558325}
   - {fileID: 1813063131}
@@ -4149,7 +4183,7 @@ Transform:
   m_GameObject: {fileID: 1970476321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.598959, y: 0, z: 22.4909363}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 1639004994}
   - {fileID: 118599690}
@@ -4173,17 +4207,16 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 1767558325}
   - {fileID: 1813063131}
-  - {fileID: 1585791230}
   arrows: []
 --- !u!135 &1970476324
 SphereCollider:
@@ -4325,7 +4358,7 @@ Transform:
   m_GameObject: {fileID: 2025946171}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.55719519, y: 0, z: -15.2664566}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 939826300}
   - {fileID: 1167773090}
@@ -4349,19 +4382,16 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 1562823434}
   - {fileID: 229536277}
-  - {fileID: 7698249}
-  - {fileID: 753910596}
-  - {fileID: 1843307036}
   arrows: []
 --- !u!135 &2025946174
 SphereCollider:
@@ -4468,7 +4498,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_Intensity: 5
-  m_Range: 8
+  m_Range: 15
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -4499,7 +4529,7 @@ Transform:
   m_PrefabInternal: {fileID: 870246464}
   m_GameObject: {fileID: 2126909111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1562823435}
