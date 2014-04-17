@@ -24,9 +24,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 111: {fileID: 11100000}
-  - 54: {fileID: 5400000}
   - 135: {fileID: 13500000}
   - 114: {fileID: 11400000}
+  - 54: {fileID: 5400000}
   m_Layer: 0
   m_Name: MySpider
   m_TagString: Untagged
@@ -1982,12 +1982,12 @@ MonoBehaviour:
   cohesionWeight: 1
   boundsWeight: 1
   neighborRadius: 5
-  desiredSeparation: 6
-  _separation: {x: 0, y: 0, z: 0}
-  _alignment: {x: 0, y: 0, z: 0}
-  _cohesion: {x: 0, y: 0, z: 0}
+  desiredSeparation: 3
+  separation: {x: 0, y: 0, z: 0}
+  alignment: {x: 0, y: 0, z: 0}
+  cohesion: {x: 0, y: 0, z: 0}
   _bounds: {x: 0, y: 0, z: 0}
-  drones: []
+  spiders: []
   swarm: {fileID: 0}
 --- !u!135 &13500000
 SphereCollider:
@@ -1996,8 +1996,8 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
+  m_IsTrigger: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
