@@ -6545,6 +6545,10 @@ Prefab:
       propertyPath: Node
       value: 
       objectReference: {fileID: 790415618}
+    - target: {fileID: 11400000, guid: 003b2dece73283246aa7ee215a52906d, type: 2}
+      propertyPath: controlPointState
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 003b2dece73283246aa7ee215a52906d, type: 2}
   m_RootGameObject: {fileID: 2077058091}

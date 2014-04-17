@@ -84,8 +84,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 50
   maxAcceleration: 20
-  maxSpeed: 30
-  separationDistance: 5
+  maxSpeed: 25
+  turnSpeed: 1
+  separationDistance: 6
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

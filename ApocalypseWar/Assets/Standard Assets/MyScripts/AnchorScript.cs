@@ -10,6 +10,7 @@ public class AnchorScript : MonoBehaviour {
 	public float distance;
 	public float maxAcceleration;
 	public float maxSpeed;
+	public float turnSpeed;
 	//public float t2t;
 	private Vector3 velocity;
 	public float separationDistance;
@@ -39,6 +40,7 @@ public class AnchorScript : MonoBehaviour {
 	{
 		if (_pathToDestination.Count == 0){
 			arrive (_destination);
+			LookAt (_destination);
 		}
 		else {
 			Vector3 dis = transform.position - _pathToDestination[0];
@@ -48,6 +50,7 @@ public class AnchorScript : MonoBehaviour {
 			}
 			if (_pathToDestination.Count > 0){
 				arrive (_pathToDestination[0]);
+				LookAt (_pathToDestination[0]);
 			}
 		}
 	}
@@ -57,15 +60,15 @@ public class AnchorScript : MonoBehaviour {
 		if (_formationObjects != null) {
 			int numTroops = _formationObjects.Count;
 			
-			for(int n = 0; n < numTroops/5; ++n)
+			for(int n = 0; n < numTroops/4; ++n)
 			{
 				int objNum = 0;
-				for(int m = -2; m <= 2; ++m)
+				for(int m = -2; m < 2; ++m)
 				{
-					if(_formationObjects[objNum+(n*5)]!=null)
+					if(_formationObjects[objNum+(n*4)]!=null)
 					{
-						_formationObjects[objNum+(n*5)].GetComponent<MobController> ().target = transform.position + 
-							new Vector3(m * separationDistance, 0, n * separationDistance);
+						_formationObjects[objNum+(n*4)].GetComponent<MobController> ().target = transform.position + 
+							transform.right * m * separationDistance + -transform.forward * n * separationDistance;
 					}
 					objNum++;
 				}
@@ -112,6 +115,15 @@ public class AnchorScript : MonoBehaviour {
 		//transform.position = position + velocity * t;
 		
 		transform.position += new Vector3(velocity.x*Time.deltaTime, 0, velocity.z*Time.deltaTime);
+	}
+	
+	void Align(Vector3 targetOrientation, float t) {
+		Quaternion targetRotation = Quaternion.LookRotation (targetOrientation, Vector3.up);
+		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, t * turnSpeed);
+	}
+	
+	void LookAt(Vector3 target) {
+		Align((target - transform.position).normalized, Time.deltaTime);
 	}
 
 	List<Vector3> GetPath (DDNode start, DDNode dest)

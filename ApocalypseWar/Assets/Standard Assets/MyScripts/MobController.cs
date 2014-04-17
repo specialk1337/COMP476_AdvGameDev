@@ -303,10 +303,10 @@ public class MobController : MonoBehaviour {
 		if(direction.magnitude > satisfactionRadius) {
 			velocity = maxVelocity * direction.normalized;
 		}
-		else if(direction.magnitude <= 2f) {
+		else if(direction.magnitude <= 1f) {
 			velocity = Vector3.zero;
 		} else {
-			velocity = Mathf.Max(maxVelocity, direction.magnitude) * direction.normalized;
+			velocity = Mathf.Min(maxVelocity, direction.magnitude) * direction.normalized;
 		}
 
 		transform.position += velocity * t;
@@ -359,6 +359,6 @@ public class MobController : MonoBehaviour {
 	}
 
 	void LookAt(Vector3 target, float t) {
-		Align((target - transform.position).normalized, Time.deltaTime);
+		Align((target - transform.position).normalized, t);
 	}
 }
