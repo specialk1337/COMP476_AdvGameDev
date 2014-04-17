@@ -68,7 +68,7 @@ public class FireballScript : MonoBehaviour {
 					if(enemy != null && friendly != enemy.friendly) 
 					{
 						if (Random.Range(0f, 1f) > enemy.dodgeChance) {
-							enemy.Project(((enemy.transform.position + Vector3.up * 5f) - transform.position).normalized * projectionPower);
+							enemy.Project(((enemy.transform.position + Vector3.up * 10f) - transform.position).normalized * projectionPower);
 							enemy.TakeDamage(caster.GetComponent<MobController>().CalcDamage(enemy.armor), true);
 						} else {
 							enemy.Dodge();

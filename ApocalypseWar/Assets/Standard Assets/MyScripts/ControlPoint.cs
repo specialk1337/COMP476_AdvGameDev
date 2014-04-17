@@ -156,7 +156,7 @@ public class ControlPoint : MonoBehaviour {
 
 		if ((controlPointState == ownerControl.Friendly || controlPointState == ownerControl.Enemy) && controlPointState != prevControlState) {
 			prevControlState = controlPointState;
-			GameObject fireworks = (GameObject)Instantiate (fireworksPrefab, transform.position + transform.up * 2f, Quaternion.identity);
+			GameObject fireworks = (GameObject)Instantiate (fireworksPrefab, transform.position + transform.up * 10f, Quaternion.identity);
         }
 	}
 

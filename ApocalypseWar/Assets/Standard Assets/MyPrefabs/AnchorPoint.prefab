@@ -85,7 +85,7 @@ MonoBehaviour:
   distance: 50
   maxAcceleration: 20
   maxSpeed: 30
-  separationDistance: 10
+  separationDistance: 5
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

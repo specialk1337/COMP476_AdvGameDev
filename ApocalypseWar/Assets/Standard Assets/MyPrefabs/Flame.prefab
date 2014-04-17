@@ -519,9 +519,9 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   friendly: 0
   radius: 5
-  triggerDistance: 1
-  projectionPower: 50
-  maxSpeed: 20
+  triggerDistance: 2.5
+  projectionPower: 25
+  maxSpeed: 50
   deathDelay: 3
 --- !u!1001 &100100000
 Prefab:

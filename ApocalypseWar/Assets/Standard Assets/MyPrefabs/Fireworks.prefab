@@ -61,8 +61,8 @@ ParticleAnimator:
   worldRotationAxis: {x: 0, y: 0, z: 0}
   localRotationAxis: {x: 0, y: 0, z: 0}
   sizeGrow: -.357573718
-  rndForce: {x: 1, y: 1, z: 1}
-  force: {x: 0, y: -5, z: 0}
+  rndForce: {x: 5, y: 5, z: 5}
+  force: {x: 0, y: -25, z: 0}
   damping: 1
   stopSimulation: 0
   autodestruct: 0
@@ -78,16 +78,16 @@ EllipsoidParticleEmitter:
   serializedVersion: 2
   m_Enabled: 1
   m_Emit: 1
-  minSize: .100000001
-  maxSize: 1
+  minSize: .5
+  maxSize: 5
   minEnergy: .5
   maxEnergy: 2
   minEmission: 75
   maxEmission: 200
   worldVelocity: {x: 0, y: 0, z: 0}
-  localVelocity: {x: 0, y: 3, z: 0}
-  rndVelocity: {x: 5, y: 5, z: 5}
-  emitterVelocityScale: .0500000007
+  localVelocity: {x: 0, y: 15, z: 0}
+  rndVelocity: {x: 25, y: 25, z: 25}
+  emitterVelocityScale: .25
   tangentVelocity: {x: 0, y: 0, z: 0}
   angularVelocity: 0
   rndAngularVelocity: 0
