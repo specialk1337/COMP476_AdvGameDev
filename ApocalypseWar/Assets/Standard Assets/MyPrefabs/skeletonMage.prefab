@@ -1037,7 +1037,7 @@ Transform:
   m_GameObject: {fileID: 100024}
   m_LocalRotation: {x: 0, y: -.965210259, z: 0, w: .261475176}
   m_LocalPosition: {x: .0116130104, y: .514642715, z: -7.55644512}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children:
   - {fileID: 400098}
   - {fileID: 400100}
@@ -1859,8 +1859,8 @@ MonoBehaviour:
   fireballPrefab: {fileID: 100002, guid: 2acf9c8e812eff6459715d2b3dce2c96, type: 2}
   target: {x: 0, y: 0, z: 0}
   flee: 0
-  maxVelocity: 3
-  maxAcceleration: 1
+  maxVelocity: 10
+  maxAcceleration: 2
   satisfactionRadius: 1
   t2t: 1
   turnSpeed: 3
