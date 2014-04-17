@@ -1859,11 +1859,11 @@ MonoBehaviour:
   fireballPrefab: {fileID: 100002, guid: 2acf9c8e812eff6459715d2b3dce2c96, type: 2}
   target: {x: 0, y: 0, z: 0}
   flee: 0
-  maxVelocity: 10
-  maxAcceleration: 2
-  satisfactionRadius: 1
+  maxVelocity: 30
+  maxAcceleration: 20
+  satisfactionRadius: 5
   t2t: 1
-  turnSpeed: 3
+  turnSpeed: 5
   velocity: {x: 0, y: 0, z: 0}
   friendly: 0
   maxHitPoints: 30
@@ -1877,10 +1877,11 @@ MonoBehaviour:
   armor: .200000003
   idleDelay: .25
   deathDelay: 2.32999992
+  separationDistance: 3
   separationWeight: 1
   alignmentWeight: 0
   cohesionWeight: 0
-  flockDistance: 3
+  flockDistance: 10
   closestEnemy: {fileID: 0}
   separation: {x: 0, y: 0, z: 0}
   alignment: {x: 0, y: 0, z: 0}

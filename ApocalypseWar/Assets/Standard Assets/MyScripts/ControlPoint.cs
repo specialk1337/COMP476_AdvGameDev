@@ -26,7 +26,7 @@ public class ControlPoint : MonoBehaviour {
 	private float BaseLightIntensity;
 	private float lastSpawn;
 	private float lastAnchor;
-	private float ActiveRadius = 4; //Find all troops inside this distance
+	private float ActiveRadius = 20; //Find all troops inside this distance
 
 	public float controlCounter; // range [-1, 1] from enemy to friendly
 	public float controlDistance;
@@ -198,7 +198,7 @@ public class ControlPoint : MonoBehaviour {
 		case ownerControl.Friendly:
 		case ownerControl.Enemy:
 			if (lastSpawn >= spawnDelay) {
-				Vector3 v = new Vector3 (Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f));
+				Vector3 v = new Vector3 (Random.Range(-3f, 3f), 0f, Random.Range(-3f, 3f));
 				GameObject mob = (GameObject)Instantiate (mobPrefab, new Vector3(transform.position.x, 0f, transform.position.z)+v, Quaternion.identity);
 				mob.GetComponent<MobController> ().Init(controlPointState == ownerControl.Friendly);
 				mob.GetComponent<MobController> ().target = getStandLocation();

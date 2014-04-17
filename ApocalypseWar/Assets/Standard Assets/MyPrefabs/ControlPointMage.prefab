@@ -139,7 +139,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -280,13 +280,13 @@ MonoBehaviour:
   ArrowPreFab: {fileID: 100000, guid: 422fc07add89cdd4c8f467d7190bf02b, type: 2}
   AnchorPreFab: {fileID: 100000, guid: 11d0c9df32667c14c8ca1ab3a15bcff1, type: 2}
   controlCounter: 0
-  controlDistance: 3
+  controlDistance: 10
   captureSpeed: .100000001
   colorFlashSpeed: 3
   healAmount: 1
   healDelay: 1
   controlPointState: 1
-  prevControlState: 0
+  prevControlState: 1
   connectedPoints:
   - {fileID: 0}
   - {fileID: 0}
