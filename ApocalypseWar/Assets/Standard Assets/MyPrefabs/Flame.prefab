@@ -518,7 +518,7 @@ MonoBehaviour:
   textPrefab: {fileID: 100000, guid: 437d9e14c9fc6574fa11af045fa33754, type: 2}
   target: {x: 0, y: 0, z: 0}
   friendly: 0
-  radius: 5
+  radius: 3
   triggerDistance: 2.5
   projectionPower: 25
   maxSpeed: 50
