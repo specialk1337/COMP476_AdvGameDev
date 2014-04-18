@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class ControlPoint : MonoBehaviour {
 
+	private static bool gameOver = false;
+
 	public enum ownerControl{Friendly, Neutral, Enemy, InConflict};
 	private static bool oneSelected = false;
 	private static bool DefendPoint = true; //set True when no forward point and troops should defend this node
@@ -26,7 +28,7 @@ public class ControlPoint : MonoBehaviour {
 	private float BaseLightIntensity;
 	private float lastSpawn;
 	private float lastAnchor;
-	private float ActiveRadius = 20; //Find all troops inside this distance
+	private float ActiveRadius = 50; //Find all troops inside this distance
 
 	public float controlCounter; // range [-1, 1] from enemy to friendly
 	public float controlDistance;
@@ -165,6 +167,33 @@ public class ControlPoint : MonoBehaviour {
 	private void SetColor(Color c) {
 		c_light.light.color = c;
 	}
+
+	// added after demo
+	private static void CheckGameOver() {
+		int friendlyMobCount = 0;
+		int enemyMobCount = 0;
+		GameObject[] mobs = GameObject.FindGameObjectsWithTag ("Mob");
+		foreach (GameObject mob in mobs) {
+			if (mob.GetComponent<MobController>().friendly) {
+				++friendlyMobCount;
+			} else {
+				++enemyMobCount;
+			}
+		}
+		int friendlyCPCount = 0;
+		int enemyCPCount = 0;
+		GameObject[] CPs = GameObject.FindGameObjectsWithTag ("ControlPoint");
+		foreach (GameObject cp in CPs) {
+			if (cp.GetComponent<ControlPoint>().controlPointState == ownerControl.Friendly) {
+				++friendlyCPCount;
+			} else if (cp.GetComponent<ControlPoint>().controlPointState == ownerControl.Enemy){
+				++enemyCPCount;
+			}
+		}
+		if ((friendlyCPCount == 0 && friendlyMobCount == 0) || (enemyCPCount == 0 && enemyMobCount == 0)) {
+			gameOver = true;
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -200,11 +229,14 @@ public class ControlPoint : MonoBehaviour {
 		case ownerControl.Friendly:
 		case ownerControl.Enemy:
 			if (lastSpawn >= spawnDelay) {
-				Vector3 v = new Vector3 (Random.Range(-3f, 3f), 0f, Random.Range(-3f, 3f));
-				GameObject mob = (GameObject)Instantiate (mobPrefab, new Vector3(transform.position.x, 0f, transform.position.z)+v, Quaternion.identity);
-				mob.GetComponent<MobController> ().Init(controlPointState == ownerControl.Friendly);
-				mob.GetComponent<MobController> ().target = getStandLocation();
-				//activeTroops.Add(mob);
+				// added check after demo to stop mobs from spawning after game ends
+				if (!gameOver) {
+					CheckGameOver();
+					Vector3 v = new Vector3 (Random.Range(-3f, 3f), 0f, Random.Range(-3f, 3f));
+					GameObject mob = (GameObject)Instantiate (mobPrefab, new Vector3(transform.position.x, 0f, transform.position.z)+v, Quaternion.identity);
+					mob.GetComponent<MobController> ().Init(controlPointState == ownerControl.Friendly);
+					mob.GetComponent<MobController> ().target = getStandLocation();
+				}
 				lastSpawn -= spawnDelay;
 			} else {
 				lastSpawn += Time.deltaTime;
