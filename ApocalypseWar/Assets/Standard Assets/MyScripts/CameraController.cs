@@ -5,11 +5,12 @@ public class CameraController : MonoBehaviour {
 	private bool mouselook;
 	private Vector3 prevMousePos;
 	public float zoomSpeed;
+	public float maxZoom;
+	public float minZoom;
 
 	// Use this for initialization
 	void Start () {
 		mouselook = false;
-		zoomSpeed = 1000f;
 	}
 	
 	// Update is called once per frame
@@ -30,8 +31,10 @@ public class CameraController : MonoBehaviour {
 			prevMousePos = Input.mousePosition;
 		}
 
+		// added zoom min and max after demo
 		if (Input.GetAxis("Mouse ScrollWheel") != 0) {
-			transform.position += transform.forward * Input.GetAxis("Mouse ScrollWheel") * zoomSpeed * Time.deltaTime;
+			transform.position += -Vector3.up * Input.GetAxis("Mouse ScrollWheel") * zoomSpeed * Time.deltaTime;
+			transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, minZoom, maxZoom), transform.position.z);
 		}
 	}
 }

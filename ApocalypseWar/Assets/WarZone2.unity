@@ -2093,7 +2093,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ae55bfdd627e3418f6dbbeb3a8a001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomSpeed: 5
+  zoomSpeed: 2000
+  maxZoom: 500
+  minZoom: 20
 --- !u!81 &508427053
 AudioListener:
   m_ObjectHideFlags: 0

@@ -1830,16 +1830,18 @@ MonoBehaviour:
   attackPower: 12
   damageVariance: .300000012
   attackDelay: 2
+  preAttackMaxDelay: .75
   attackRange: 15
   aggroRange: 25
   dodgeChance: .200000003
   armor: .100000001
-  idleDelay: .5
+  idleDelay: .200000003
   deathDelay: 2.32999992
   separationDistance: 5
   separationWeight: 1
   alignmentWeight: 0
   cohesionWeight: 0
+  seekWeight: 1
   flockDistance: 10
   closestEnemy: {fileID: 0}
   separation: {x: 0, y: 0, z: 0}
