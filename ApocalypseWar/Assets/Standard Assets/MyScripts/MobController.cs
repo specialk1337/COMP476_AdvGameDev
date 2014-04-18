@@ -25,6 +25,9 @@ public class MobController : MonoBehaviour {
 	public float damageVariance; // % of damage variation each attack, [0, 1]
 	public float attackDelay; // seconds per attack
 	private float attackTimer; // attack cooldown time
+	public float preAttackMaxDelay; // max delay before attack hits
+	private float preAttackDelay; // actual delay (randomized)
+	private float preAttackTimer; // pre-attack cooldown time
 	public float attackRange; // attack range
 	public float aggroRange; // range to react to an enemy
 	public float dodgeChance; // % chance to avoid an attack, range [0, 1]
@@ -38,6 +41,7 @@ public class MobController : MonoBehaviour {
 	public float separationWeight;
 	public float alignmentWeight;
 	public float cohesionWeight;
+	public float seekWeight;
 	public float flockDistance;
 
 	public GameObject closestEnemy;
@@ -53,6 +57,7 @@ public class MobController : MonoBehaviour {
 		velocity = Vector3.zero;
 		projectionVelocity = Vector3.zero;
 		target = transform.position;
+		preAttackDelay = Random.Range(0f, preAttackMaxDelay);
 	}
 
 	public void Init(bool friendly) {
@@ -61,10 +66,6 @@ public class MobController : MonoBehaviour {
 		foreach (MeshRenderer mr in meshRenderers) {
 			mr.material.color = friendly ? Color.green : Color.red;
 		}
-		// body color
-		//materials[0].color = friendly ? Color.green : Color.red;
-		// head color
-		//materials[1].color = Color.Lerp(Color.black, Color.white, currentHitPoints / (float)maxHitPoints);
 	}
 	
 	// Update is called once per frame
@@ -79,45 +80,28 @@ public class MobController : MonoBehaviour {
 		} else {
 			
 			closestEnemy = FindClosestEnemy ();
-			
+
+			// decision tree, seekWeight added after demo so mobs can flock while attacking
 			if (closestEnemy != null) {
 				float distance = Vector3.Distance(transform.position, closestEnemy.transform.position);
 				if (distance < attackRange) {
 					Attack(closestEnemy, t);
+					Flock(0f);
 				} else {
 					if (distance < aggroRange) {
 						target = closestEnemy.transform.position;
 					}
-					Flock();
-					Move(t);
+					Flock(seekWeight);
 				}
+				Move(t);
 			} else {
-				//Flock();
-				//Move(t);
 				animation.Play("dance");
 			}
 		}
 	}
-	/*
-	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.CompareTag ("Mob")) {
-			//if (!mobsInRange.Contains(other.gameObject)) {
-				mobsInRange.Add(other.gameObject);
-			//}
-		}
 
-	}
-	
-	void OnTriggerExit(Collider other) {
-		if (other.gameObject.CompareTag ("Mob")) {
-			//if (mobsInRange.Contains(other.gameObject)) {
-				mobsInRange.Remove(other.gameObject);
-			//}
-		}
-		
-	}
-	*/
-	private void Flock() {
+	// added seek weight after demo so mobs can flock while attacking
+	private void Flock(float seekWeight) {
 		separation = Vector3.zero;
 		alignment = Vector3.zero;
 		cohesion = Vector3.zero;
@@ -163,12 +147,8 @@ public class MobController : MonoBehaviour {
 			cohesion -= transform.position;
 			cohesion = Vector3.ClampMagnitude(cohesion, maxVelocity);
 		}
-		/*
-		Debug.Log (separation);
-		Debug.Log (alignment);
-		Debug.Log (cohesion);
-		*/
-		velocity = Vector3.ClampMagnitude(target - transform.position, maxVelocity);
+
+		velocity = Vector3.ClampMagnitude(target - transform.position, maxVelocity) * seekWeight;
 		velocity += separation * separationWeight + alignment * alignmentWeight + cohesion * cohesionWeight;
 		velocity = Vector3.ClampMagnitude(velocity, maxVelocity);
 		targetPoint = transform.position + velocity;
@@ -194,22 +174,28 @@ public class MobController : MonoBehaviour {
 		return enemy;
 	}
 
+	// added random pre-attack delay after demo so mobs don't all attack at once 
 	private void Attack(GameObject target, float t) {
 		MobController enemy = target.GetComponent<MobController>();
 		LookAt (target.transform.position, t);
 		if (attackTimer <= 0) {
-			animation.Play ("attack");
-			attackTimer += attackDelay;
-			if (gameObject.name.Equals("skeletonMage(Clone)")) {
-				GameObject fireball = (GameObject)Instantiate (fireballPrefab, transform.position + (transform.forward + transform.up) / 2f, Quaternion.identity);
-				fireball.GetComponent<FireballScript>().Init(gameObject, enemy.transform.position, friendly);
-			} else {
-				if (Random.Range(0f, 1f) > enemy.dodgeChance) {
-					enemy.TakeDamage(CalcDamage(enemy.armor), false);
+			preAttackDelay = Random.Range (0f, preAttackMaxDelay);
+			if (preAttackTimer <= 0) {
+				animation.Play ("attack");
+				attackTimer += attackDelay;
+				preAttackTimer += preAttackDelay;
+				if (gameObject.name.Equals("skeletonMage(Clone)")) {
+					GameObject fireball = (GameObject)Instantiate (fireballPrefab, transform.position + (transform.forward + transform.up) / 2f, Quaternion.identity);
+					fireball.GetComponent<FireballScript>().Init(gameObject, enemy.transform.position, friendly);
 				} else {
-					enemy.Dodge();
+					if (Random.Range(0f, 1f) > enemy.dodgeChance) {
+						enemy.TakeDamage(CalcDamage(enemy.armor), false);
+					} else {
+						enemy.Dodge();
+					}
 				}
 			}
+			preAttackTimer -= t;
 		}
 		attackTimer -= t;
 	}
@@ -222,7 +208,7 @@ public class MobController : MonoBehaviour {
 
 	public void Dodge() {
 		GameObject damageDisplay = (GameObject)Instantiate (textPrefab, transform.position, Quaternion.identity);
-		damageDisplay.GetComponent<TextScript>().Init("Dodge!", Color.white);
+		damageDisplay.GetComponent<TextScript>().Init("miss", Color.white);
 	}
 
 	public void TakeDamage(int amount, bool fire) {
@@ -270,12 +256,6 @@ public class MobController : MonoBehaviour {
 
 		attackTimer = 0f;
 
-		/* Handle if the anchor gets deleted - Kevin
-		if(target != null)
-		{
-			targetPoint = target;
-		}
-		*/
 		KinematicArrive (targetPoint, t);
 		
 		if (velocity.magnitude > 0) {
@@ -310,8 +290,6 @@ public class MobController : MonoBehaviour {
 		}
 
 		transform.position += velocity * t;
-		
-		//transform.position = new Vector3(position.x, 1, position.y);
 	}
 	
 	void SteeringArrive(Vector3 target, float t) {
@@ -325,8 +303,6 @@ public class MobController : MonoBehaviour {
 		}
 		
 		transform.position += velocity * t;
-		
-		//transform.position = new Vector3(position.x, 1, position.y);
 	}
 	
 	void SteeringFlee(Vector3 target, float t) {
@@ -339,8 +315,6 @@ public class MobController : MonoBehaviour {
 			velocity = maxVelocity * velocity.normalized;
 		
 		transform.position += velocity * t;
-		
-		//transform.position = new Vector3(position.x, 1, position.y);
 	}
 	
 	void KinematicFlee(Vector3 target, float t) {
@@ -349,8 +323,6 @@ public class MobController : MonoBehaviour {
 		velocity = maxVelocity * direction.normalized;
 		
 		transform.position += velocity * t;
-		
-		//transform.position = new Vector3(position.x, 1, position.y);
 	}
 	
 	void Align(Vector3 targetOrientation, float t) {
