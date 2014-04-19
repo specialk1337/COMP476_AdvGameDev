@@ -56,27 +56,43 @@ public class AnchorScript : MonoBehaviour {
 	}
 	private void formations()
 	{
-		/* Basic formation 4xN*/
-		if (_formationObjects != null) {
-			int numTroops = _formationObjects.Count;
-			
-			for(int n = 0; n < numTroops/4; ++n)
+		List<GameObject> magelist = new List<GameObject> ();
+		List<GameObject> meleelist = new List<GameObject> ();
+
+		Vector2[] formationPositions = {
+			new Vector2 (-2, 0),new Vector2 (1, 0),new Vector2 (0, 0),new Vector2 (-1, 0),
+			new Vector2 (-2, 1),new Vector2 (1, 1),new Vector2 (0, 1),new Vector2 (-1, 1),
+			new Vector2 (-2, 2),new Vector2 (1, 2),new Vector2 (0, 2),new Vector2 (-1, 2),
+			new Vector2 (-2, 3),new Vector2 (1, 3),new Vector2 (0, 3),new Vector2 (-1, 3),
+		};
+
+		int melee = 0;
+		int mage = 15;
+		foreach(GameObject obj in _formationObjects)
+		{
+			if(obj != null)
 			{
-				int objNum = 0;
-				for(int m = -2; m < 2; ++m)
+				if(obj.transform.gameObject.name.Equals("skeletonMage(Clone)"))
 				{
-					if(_formationObjects[objNum+(n*4)]!=null)
-					{
-						_formationObjects[objNum+(n*4)].GetComponent<MobController> ().target = transform.position + 
-							transform.right * m * separationDistance + -transform.forward * n * separationDistance;
-					}
-					objNum++;
+					magelist.Add(obj);
+					obj.GetComponent<MobController> ().target = transform.position + 
+						transform.right * formationPositions[mage].x * separationDistance + -transform.forward * formationPositions[mage].y * separationDistance;
+					mage--;
+				}
+				else
+				{
+					meleelist.Add(obj);
+					obj.GetComponent<MobController> ().target = transform.position + 
+						transform.right * formationPositions[melee].x * separationDistance + -transform.forward * formationPositions[melee].y * separationDistance;
+					melee++;
+				
 				}
 			}
+			magelist.Add(null);
+			meleelist.Add(null);
 		}
-
-
 	}
+
 	private void seek(Vector3 dest)
 	{
 		Vector3 direction = dest - transform.position;
@@ -95,7 +111,7 @@ public class AnchorScript : MonoBehaviour {
 	private void killMe()
 	{
 		Vector3 dis = transform.position - _destination;
-		if(dis.magnitude < 3)
+		if(dis.magnitude < 4.5)
 		{
 			Destroy(gameObject);
 		}

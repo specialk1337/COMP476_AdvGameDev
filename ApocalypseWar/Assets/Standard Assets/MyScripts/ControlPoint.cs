@@ -347,26 +347,33 @@ public class ControlPoint : MonoBehaviour {
 		if (lastAnchor >= anchorDelay) {
 			Collider[] hitColliders = Physics.OverlapSphere(transform.position, ActiveRadius);
 			activeTroops.Clear();
-			/*GameObject[] mobs = GameObject.FindGameObjectsWithTag ("Mob");
-			float distance;
-			foreach (GameObject m in mobs) {
-				distance = (m.transform.position - gameObject.transform.position).magnitude;
-				if (distance < controlDistance &&
-				    controlPointState == ownerControl.Friendly && m.GetComponent<MobController>().friendly ||
-				    controlPointState == ownerControl.Enemy && !m.GetComponent<MobController>().friendly) {
-					activeTroops.Add (m);
-				}
-			}*/
+
 			if(hitColliders.Length>0)
 			{
+				int meleeCount = 0;
+				int mageCount = 0;
+
 				foreach(Collider inRangeUnit in hitColliders)
 				{
-					if(inRangeUnit.transform.tag == "Mob")
+					if(inRangeUnit.transform.tag == "Mob" && meleeCount+mageCount < 16)
 					{
+
 						if(	controlPointState == ownerControl.Friendly && inRangeUnit.gameObject.GetComponent<MobController>().friendly ||
 							controlPointState == ownerControl.Enemy && !inRangeUnit.gameObject.GetComponent<MobController>().friendly) 
 						{
-							activeTroops.Add (inRangeUnit.gameObject);
+							if(inRangeUnit.transform.gameObject.name.Equals("skeletonMage(Clone)"))
+							{
+								if(mageCount < 4)
+								{
+									mageCount++;
+									activeTroops.Add (inRangeUnit.gameObject);
+								}
+							}
+							else
+							{
+								meleeCount++;
+								activeTroops.Add (inRangeUnit.gameObject);
+							}
 						}
 					}
 				}
