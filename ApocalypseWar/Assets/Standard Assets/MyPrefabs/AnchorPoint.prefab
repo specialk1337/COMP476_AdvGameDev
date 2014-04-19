@@ -83,8 +83,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 50
-  maxAcceleration: 20
-  maxSpeed: 25
+  maxAcceleration: 50
+  maxSpeed: 15
   turnSpeed: 1
   separationDistance: 6
 --- !u!135 &13500000

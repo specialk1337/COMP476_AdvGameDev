@@ -62,8 +62,9 @@ public class FlockUnit : MonoBehaviour
 		newVelocity.y = 0f;
 		
 		rigidbody.velocity = Limit (newVelocity, maxSpeed);
+		transform.LookAt (transform.position + alignment);
 		Vector3 temp = transform.position;
-		temp.y = 0f;
+		temp.y = 20f;
 		this.transform.position = temp;
 	}
 
@@ -129,8 +130,6 @@ public class FlockUnit : MonoBehaviour
 		Vector3 steer = Vector3.zero;
 		Vector3 targetDirection = target - transform.position;
 		float targetDistance = targetDirection.magnitude;
-		
-		transform.LookAt (target);
 		
 		if (targetDistance > 0) {
 

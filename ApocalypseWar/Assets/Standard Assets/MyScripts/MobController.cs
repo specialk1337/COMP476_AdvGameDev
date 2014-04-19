@@ -93,7 +93,7 @@ public class MobController : MonoBehaviour {
 					}
 					Flock(seekWeight);
 				}
-				Move(t);
+				Move(t, distance >= attackRange);
 			} else {
 				animation.Play("dance");
 			}
@@ -252,7 +252,7 @@ public class MobController : MonoBehaviour {
 		}
 	}
 
-	private void Move(float t) {
+	private void Move(float t, bool animate) {
 
 		attackTimer = 0f;
 
@@ -271,10 +271,12 @@ public class MobController : MonoBehaviour {
 		} else {
 			idleTimer = 0f;
 		}
-		if (idleTimer >= idleDelay)
-			animation.Play ("waitingforbattle");
-		else
-			animation.Play ("run");
+		if (animate){
+			if (idleTimer >= idleDelay)
+				animation.Play ("waitingforbattle");
+			else
+				animation.Play ("run");
+		}
 	}
 	
 	void KinematicArrive(Vector3 target, float t) {

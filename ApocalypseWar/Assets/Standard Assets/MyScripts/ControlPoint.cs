@@ -115,15 +115,6 @@ public class ControlPoint : MonoBehaviour {
 		return arrows;
 	}
 
-	/*void OnTriggerEnter(Collider other) {
-		if (other.CompareTag ("Mob")) {
-			if (controlPointState == ownerControl.Friendly && other.gameObject.GetComponent<MobController>().friendly ||
-			    controlPointState == ownerControl.Enemy && !other.gameObject.GetComponent<MobController>().friendly) {
-				activeTroops.Add(other.gameObject);
-			}
-		}
-	}*/
-
 	private void arrowSelector()
 	{
 
@@ -457,17 +448,4 @@ public class ControlPoint : MonoBehaviour {
 		}
 
 	}
-
-	/*void OnMouseDown(){
-		firstDelay = true;
-		if(!oneSelected){
-			_isSelected = true;
-			oneSelected = true; // Static valuse to limit 1 object selected at a time
-		}
-		else if(oneSelected && _isSelected)
-		{
-			_isSelected = false;
-			oneSelected = false;
-		}
-	}*/
 }

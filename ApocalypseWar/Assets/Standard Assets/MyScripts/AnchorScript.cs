@@ -44,7 +44,7 @@ public class AnchorScript : MonoBehaviour {
 		}
 		else {
 			Vector3 dis = transform.position - _pathToDestination[0];
-			if(dis.magnitude < 3)
+			if(dis.magnitude < 6)
 			{
 				_pathToDestination.RemoveAt(0);
 			}
@@ -120,12 +120,16 @@ public class AnchorScript : MonoBehaviour {
 	private void arrive(Vector3 dest)
 	{
 		Vector3 direction = dest - transform.position;
-		Vector3 acceleration = maxAcceleration * direction.normalized;
-		
-		velocity = velocity + acceleration * Time.deltaTime;
+		Vector3 acceleration;
+		acceleration = maxAcceleration * direction.normalized;
+
+		if (direction.magnitude < 10)
+			velocity = velocity + direction.normalized * maxSpeed * Time.deltaTime;
+		else
+			velocity = velocity + acceleration * Time.deltaTime;
 		
 		if (velocity.magnitude > maxSpeed) {
-			velocity = Mathf.Min (maxSpeed, direction.magnitude / distance) * velocity.normalized;
+			velocity = maxSpeed * velocity.normalized;
 		}
 		
 		//transform.position = position + velocity * t;

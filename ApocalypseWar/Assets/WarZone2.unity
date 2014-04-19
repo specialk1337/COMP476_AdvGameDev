@@ -2163,7 +2163,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 508427051}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ecb84247fa73ee040b15908475994c44, type: 3}
   m_Name: 
@@ -2581,7 +2581,7 @@ Transform:
   m_PrefabInternal: {fileID: 2043805866}
   m_GameObject: {fileID: 594192618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55.5393677, y: 2.50183105, z: -131.831238}
+  m_LocalPosition: {x: -55.5393677, y: 0, z: -131.831238}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 801764387}
@@ -3153,49 +3153,6 @@ Prefab:
   m_RootGameObject: {fileID: 513436069}
   m_IsPrefabParent: 0
   m_IsExploded: 1
---- !u!1 &713968469
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 713968470}
-  - 114: {fileID: 713968471}
-  m_Layer: 0
-  m_Name: Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &713968470
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 713968469}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -136.930664, y: 0, z: -136.349655}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
---- !u!114 &713968471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 713968469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39d59a22260a95b4ba9c78266f0bb19f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spiderCount: 50
-  spawnRadius: 50
-  spiders: []
-  swarmBounds: {x: 300, y: 300}
-  prefab: {fileID: 100002, guid: 4b9c623511d753c4d8d0e45b0189ae2e, type: 2}
 --- !u!1 &751525481
 GameObject:
   m_ObjectHideFlags: 0
@@ -8040,7 +7997,7 @@ MonoBehaviour:
   spiderCount: 100
   spawnRadius: 100
   spiders: []
-  swarmBounds: {x: 300, y: 300}
+  swarmBounds: {x: 200, y: 300}
   prefab: {fileID: 100000, guid: adec277742bd5d34d994e258832100e1, type: 2}
 --- !u!4 &2020728524
 Transform:
@@ -8049,7 +8006,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2020728522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.06842041, y: 58.2374344, z: 38.9658012}
+  m_LocalPosition: {x: -2.06842041, y: 48, z: 38.9658012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8070,7 +8027,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ee02b82ff5f9e684599f8240d6ef81e6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.50183105
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ee02b82ff5f9e684599f8240d6ef81e6, type: 2}
       propertyPath: m_LocalPosition.z
