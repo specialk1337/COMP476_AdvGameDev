@@ -8037,7 +8037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d59a22260a95b4ba9c78266f0bb19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderCount: 50
+  spiderCount: 100
   spawnRadius: 100
   spiders: []
   swarmBounds: {x: 300, y: 300}
@@ -8049,7 +8049,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2020728522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.06842041, y: 24.8984985, z: 38.9658012}
+  m_LocalPosition: {x: -2.06842041, y: 58.2374344, z: 38.9658012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
