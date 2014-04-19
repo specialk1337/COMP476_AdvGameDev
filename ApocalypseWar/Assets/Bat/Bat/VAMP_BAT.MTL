@@ -1,0 +1,16 @@
+# Wavefront material library
+# Tue Aug 03 07:52:36 1999
+# Created with Viewpoint Interchange www.viewpoint.com
+
+newmtl bat_body
+  Ka 0 0 0
+  Kd 0 0 0
+  Ks 0 0 0
+  illum 2
+  map_Kd images\vampbat.TIF
+
+newmtl bat_eye
+  Ka 0 0 0
+  Kd 0.160784 0.14902 0.215686
+  Ks 0.160784 0.14902 0.215686
+  illum 2

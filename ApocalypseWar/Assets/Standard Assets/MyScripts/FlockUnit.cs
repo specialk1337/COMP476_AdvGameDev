@@ -29,21 +29,21 @@ public class FlockUnit : MonoBehaviour
 	public List<GameObject> spiders;
 	public ControlFlock swarm;
 	
-//		void FixedUpdate ()
-//		{
-//
-//				Flock ();
-//		}
-//	
+		void FixedUpdate ()
+		{
+
+				Flock ();
+		}
+	
 	void Start ()
 	{
 		
 	}
 	
-	void Update ()
-	{
-		Flock ();
-	}
+//	void Update ()
+//	{
+//		Flock ();
+//	}
 	
 	public  void Flock ()
 	{
@@ -62,6 +62,9 @@ public class FlockUnit : MonoBehaviour
 		newVelocity.y = 0f;
 		
 		rigidbody.velocity = Limit (newVelocity, maxSpeed);
+		Vector3 temp = transform.position;
+		temp.y = 0f;
+		this.transform.position = temp;
 	}
 
 	public void CalculateVelocities ()
