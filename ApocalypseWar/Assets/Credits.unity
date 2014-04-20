@@ -168,7 +168,6 @@ MonoBehaviour:
     y: 45
     width: 200
     height: 100
-  teams: "Kevin Cameron\n Nickolas Constantinides\n Audrey Paiement\n David Huang"
   LoadIntro: Intro
   guiSkin: {fileID: 11400000, guid: 7953503d9e83f8d469b84619849edd4e, type: 2}
 --- !u!1 &1107445692

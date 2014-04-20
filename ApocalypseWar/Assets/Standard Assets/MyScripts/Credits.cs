@@ -5,7 +5,7 @@ public class Credits : MonoBehaviour {
 	public Rect button = new Rect(50,50,100,65);
 	public Rect buttonCred = new Rect(180,100, 100, 40);
 
-	public string teams = "Kevin Cameron\n Nicholas Constantinidis\n Audrey Paiement\n David Huang";
+	private string teams = "Kevin Cameron\n Nicholas Constantinidis\n Audrey Paiement\n David Huang";
 
 	public string LoadIntro = "Intro";
 	
